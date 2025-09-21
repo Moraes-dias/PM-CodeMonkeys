@@ -39,6 +39,18 @@ class status extends pokemon{
 
 */
 
+class user{
+    constructor(senha = 0, email='eita' , usuario='kkkkk'){
+        this.senha = senha;
+        this.email = email;
+        this.usuario=usuario;
+    }
+    mostrarDadosUsuario()
+    {
+        return usuario: ${this.usuario} email: ${this.email}
+    }
+}
+
 descricao() //metodo para mostrar as caracteristicas do pokemon
     { //linhas 15 ate 18
         return `#${this.numDex} ${this.nome} ${this.regiao} Tipagem: ${this.tipos.join(", ")} ${this.favorito}`
