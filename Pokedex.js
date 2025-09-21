@@ -67,3 +67,55 @@ descricao() //metodo para mostrar as caracteristicas do pokemon
     {
         return `usuario: ${this.usuario} email: ${this.email}`
     }
+
+    class pokemon
+{
+    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
+    /*
+        construtor do pokemon necessario fazer 2 classes uma para o 
+        o pokemon em si e uma para os status para assim evitar linhas desnecessarias
+    */
+    {
+        this.numDex = numDex;
+        this.nome = nome;
+        this.regiao = regiao;
+        this.tipos = tipos;
+        this.favorito = favorito;
+    }
+    descricao() //metodo para mostrar as caracteristicas do pokemon
+    {
+        return #${this.numDex} ${this.nome} ${this.regiao} Tipagem: ${this.tipos.join(", ")} favorito: ${this.favorito}
+    }                                                                 //join serve para fazer com que o vetor fique todo unido numa so string
+}
+class status extends pokemon
+{
+    constructor(numDex, nome, regiao, tipos, favorito, hp = 0,ataque = 0, defesa = 0, velocidade = 0)
+    {
+        super(numDex, nome, regiao, tipos, favorito); //heranca das caracteristicas da classe pai (pokemon)
+
+        this.hp = hp;
+        this.ataque = ataque;
+        this.defesa = defesa;
+        this.velocidade = velocidade;
+    }
+    mostrarValores() //mostrar somente os status
+    {
+        return hp: ${this.hp} ataques: ${this.ataque} defesas: ${this.defesa} velocidade: ${this.velocidade}
+    }
+}
+
+let pokeImaginario = new status(
+    0o1,//dex
+    'Inexistente',//nome
+    "imaginario",//regiao
+    ['fogo', 'agua'],// tipos
+    100,//hp
+    100,//ataques
+    100,//defesas
+    100//velocidade
+    );
+
+let usuarioNovo = new user("Ali123", "umemail@gmail.com", "hihiha")
+console.log(pokeImaginario.descricao())
+console.log(pokeImaginario.mostrarValores())
+console.log(usuarioNovo.mostrarDadosUsuario())
