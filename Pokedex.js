@@ -2,7 +2,7 @@ class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
     /*
-        construtor do pokemon necessario fazer 2 classes uma para o 
+        construtor do pokemon necessario fazer 2 classes uma para o
         o pokemon em si e uma para os status para assim evitar linhas desnecessarias
     */
     {
@@ -12,9 +12,9 @@ class pokemon
         this.tipos = tipos;
         this.favorito = favorito;
     }
-}   
+}
 
-class status extends pokemon{ 
+class status extends pokemon{
     constructor(Numdex = 0 , psy=0 , def=0 , speed=0 , hp=0){
         this.Numdex = Numdex
         this.psy = psy
@@ -26,7 +26,7 @@ class status extends pokemon{
 
 /*
     versão corrigida
-    class status extends pokemon{ 
+    class status extends pokemon{
     constructor(Numdex = 0 , psy=0 , def=0 , speed=0 , hp=0){
     super(dex, nome, tipo); chama constructor da classe pai
         this.Numdex = Numdex;
@@ -54,7 +54,7 @@ class user{
 descricao() //metodo para mostrar as caracteristicas do pokemon
     { //linhas 15 ate 18
         return `#${this.numDex} ${this.nome} ${this.regiao} Tipagem: ${this.tipos.join(", ")} ${this.favorito}`
-    }            
+    }
 
     mostrarValores() //mostrar somente os status
 //linhas 33 ate 36
@@ -72,7 +72,7 @@ descricao() //metodo para mostrar as caracteristicas do pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
     /*
-        construtor do pokemon necessario fazer 2 classes uma para o 
+        construtor do pokemon necessario fazer 2 classes uma para o
         o pokemon em si e uma para os status para assim evitar linhas desnecessarias
     */
     {
@@ -89,13 +89,16 @@ descricao() //metodo para mostrar as caracteristicas do pokemon
 }
 class status extends pokemon
 {
-    constructor(numDex, nome, regiao, tipos, favorito, hp = 0,ataque = 0, defesa = 0, velocidade = 0)
+    constructor(numDex, nome, regiao, tipos, favorito,  hp = 0,atkFisico = 0, defFisica = 0, atkEspecial = 0, defEspecial = 0, velocidade = 0)
+    {
     {
         super(numDex, nome, regiao, tipos, favorito); //heranca das caracteristicas da classe pai (pokemon)
 
         this.hp = hp;
-        this.ataque = ataque;
-        this.defesa = defesa;
+        this.atkFisico = atkFisico;
+        this.defFisica = defFisica;
+        this.atkEspecial = atkEspecial;
+        this.defEspecial = defEspecial;
         this.velocidade = velocidade;
     }
     mostrarValores() //mostrar somente os status
@@ -119,3 +122,4 @@ let usuarioNovo = new user("Ali123", "umemail@gmail.com", "hihiha")
 console.log(pokeImaginario.descricao())
 console.log(pokeImaginario.mostrarValores())
 console.log(usuarioNovo.mostrarDadosUsuario())
+
