@@ -67,8 +67,7 @@ let pokeImaginario = new status(
     30 //velocidade
     );
 
-let usuarioNovo = new user("Ali123", "umemail@gmail.com", "hihiha")
-console.log(pokeImaginario.descricao())
-console.log(pokeImaginario.mostrarValores())
-console.log(usuarioNovo.mostrarDadosUsuario())
+@param {Object} dados
+@param {string} regiaPadrao
+@returns {status}
 
