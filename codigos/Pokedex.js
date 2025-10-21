@@ -68,6 +68,11 @@ let pokeImaginario = new status(
     );
 
 @param {Object} dados
-@param {string} regiaPadrao
+@param {string} regiaoPadrao
 @returns {status}
 
+async function criarPokemons(dados, regiaoPadrao = 'desconhecida') {
+    const linkUrl = "https://pokeapi.co/api/v2/pokemon/"
+
+    const 
+}
