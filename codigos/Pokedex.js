@@ -53,19 +53,6 @@ class user{
 
 }
 
-let pokeImaginario = new status(
-    0o1,//dex
-    'Inexistente',//nome
-    "imaginario",//regiao
-    ['fogo', 'agua'],// tipos
-    true, //favorito
-    120, //hp
-    50, //atkFisico
-    200, //defFisico
-    60, //atkEspecial
-    60, //defEspecial
-    30 //velocidade
-    );
 /**
 * mapeamento de dados da api
 *@param {Object} dados//esses tres ajudam a entender o que a funcao vai fazer
@@ -114,10 +101,10 @@ function mapeamentoStatus(dados, regiaoPadrao = 'desconhecida')
  * @returns {Promise<array<status>>} retorna a promise
  */
 
-async function criarPokemons(dados, regiaoPadrao = 'desconhecida') {
+async function criarPokemons(identificadores, regiaoPadrao = 'desconhecida') {
     const linkUrl = "https://pokeapi.co/api/v2/pokemon/"
 
-    const buscarPromise = idenficador.map(id =>
+    const buscarPromise = identificadores.map(id =>
         fetch(`${linkUrl}${String(id).toLowerCase()}`)
     );
 
@@ -125,8 +112,84 @@ async function criarPokemons(dados, regiaoPadrao = 'desconhecida') {
         //o await faz com que as promises sejam terminadas
         const respostas = await Promise.all(buscarPromise);
 
-        const 
-    } catch ({error}) {
+        const respostaPromise = respostas.map(resposta =>{
+            if(!resposta.ok) {
+                throw new Error(`Falha ao buscar ID/Nome: ${resposta.url.split('/').pop()}`);
 
+            }
+            return resposta.json();
+        });
+
+        const tudoCompleto = await Promise.all(respostaPromise);
+
+        const listaPokemons = tudoCompleto.map(dados => mapeamentoStatus(dados, 'Kanto'));
+        return listaPokemons;
+    } catch (erro) {
+        console.error("Um erro ocorreu durante a busca de dados em lote: ", erro.message)
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', ()=> {
+    const form = document.getElementById('form-busca');
+    const buscador = document.getElementById('busca')
+    const resultado = document.getElementById('resultado')
+        function buscar(evento) {
+            evento.preventDefault();
+
+
+            let termo = buscador.value.trim();
+
+            if(termo === "")
+            {
+                resultado.innerHTML = "<p>Digite o nome de um pokemon da primeira geração</p>"
+                return;
+            }
+
+            resultado.innerHTML = `Buscando ${termo.toLowerCase()}...`;
+
+
+            exibicao([termo]);
+        }
+
+
+        async function exibicao(identificadores)
+        {
+            try{
+                const listaPokemons = await criarPokemons(identificadores, 'Região Desconhecida');
+
+                if(listaPokemons && listaPokemons.length > 0)
+                {
+                    const pokemonEncontrado = listaPokemons[0]
+
+                    const htmlConteudo =
+                    `
+                    <h2>${pokemonEncontrado.numDex} ${pokemonEncontrado.nome}</h2>
+                    <p>Região: ${pokemonEncontrado.regiao}</p>
+                    <p>Tipo: ${pokemonEncontrado.tipos.join(" / ")}</p>
+                    <p>Favorito: ${pokemonEncontrado.favorito ? 'sim' : 'não'}</p>
+                    <hr>
+                    <h3>Status</h3>
+                    <p>${pokemonEncontrado.mostrarValores()}</p>
+                    `;
+
+                    resultado.innerHTML = htmlConteudo;
+                } else {
+                    resultado.innerHTML = `<p style = "color: red;">Pokemon "${identificadores}" não encontrado. Tente outro nome/ID`
+                }
+            } catch (erro){
+                console.error("Erro na busca e exibição: ", erro)
+                resultado.innerHTML = `<p style = "color: red;">Um erro inesperado aconteceu: ${erro.messsage}</p>`
+            }
+
+
+        }
+
+
+    if(form){
+            form.addEventListener('submit', buscar)
+        } else {
+            console.error("Elemento não encontrado")
+        }
+});
+
