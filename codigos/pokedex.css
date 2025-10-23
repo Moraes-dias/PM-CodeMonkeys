@@ -1,3 +1,5 @@
+/* pokedex.css */
+
 body {
     margin: 0;
     padding: 0;
@@ -8,64 +10,30 @@ body {
     background-attachment: fixed;
 }
 
-@media (max-width: 600px) {
-    /* 1. Mudar o layout principal para empilhar itens */
-    .container-principal {
-        flex-direction: column; /* Coloca a logo e a lista de links um abaixo do outro */
-        align-items: flex-start; /* Alinha tudo à esquerda */
-        padding: 10px;
-    }
-
-    /* 2. Mudar a logo */
-    .logo {
-        margin-bottom: 10px; /* Adiciona espaço abaixo da logo */
-        /* Não precisa de hover se for um item de topo, mas você pode manter */
-    }
-
-    /* 3. Mudar a lista de navegação */
-    .navbar-nav {
-        flex-direction: column; /* Empilha os links verticalmente */
-        width: 100%; /* Faz a lista ocupar a largura total disponível */
-    }
-
-    /* 4. Mudar os links individuais */
-    .nav-link {
-        text-align: center; /* Centraliza o texto do link */
-        padding: 10px; /* Ajusta o padding */
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Opcional: separador entre links */
-    }
-
-    /* 5. Ajustar o background-image para telas pequenas */
-    body {
-        /* Garante que a imagem de fundo ainda pareça boa */
-        background-position: center center;
-    }
-}
-
+/* NAVBAR */
 #navegar {
     width: 100%;
     background-color: rgb(132, 17, 17);
     border-bottom: 15px solid #000;
 }
 
-
 .container-principal {
     max-width: 1100px;
     margin: 0 auto;
-
-
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* logo à esquerda, links à direita */
     align-items: center;
-    padding: 20px; 
+    padding: 20px;
     font-size: 18px;
 }
 
+/* LOGO */
 .logo {
     color: black;
     text-decoration: none;
     padding: 10px 15px;
     font-weight: bold;
+    font-size: 22px;
 }
 
 .logo:hover {
@@ -74,21 +42,26 @@ body {
     border-radius: 15px;
 }
 
+/* LINKS */
 .navbar-nav {
     display: flex;
+    flex-direction: row;
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    list-style-type: none;
+}
+
+.navbar-nav li {
+    margin-left: 15px; /* espaçamento entre links */
 }
 
 .nav-link {
-    display: block;
-    padding: 10px 15px;
     text-decoration: none;
-    color: black; 
+    color: black;
     font-weight: bold;
+    padding: 10px 15px;
+    transition: 0.3s;
 }
-
 
 .nav-link.active {
     color: #f0f0f0;
@@ -98,4 +71,27 @@ body {
     background-color: black;
     color: whitesmoke;
     border-radius: 15px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+    .container-principal {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar-nav li {
+        margin: 5px 0;
+    }
+
+    body {
+        background-position: center center;
+    }
 }
