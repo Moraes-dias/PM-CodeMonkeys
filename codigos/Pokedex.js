@@ -134,23 +134,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
     const buscador = document.getElementById('busca')
     const resultado = document.getElementById('resultado')
-        function gerarPoke(poke) {
-            return `
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-                <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
-                            <p class="card-text small mb-1"><strong>Região:</strong> ${p.regiao}</p>
-                            <p class="card-text small mb-2"><strong>Tipagem:</strong> <span class="badge bg-secondary">${p.tipos.join("</span> <span class='badge bg-secondary'>")}</span></p>
-                            <p class="card-text small mb-2"><strong>Favorito:</strong> ${p.favorito ? 'Sim' : 'Não'}</p>
-                            <hr class="my-1">
-                            <p class="card-text small text-muted text-truncate" title="${p.mostrarValores()}">
-                            ${p.mostrarValores()}
-                            </p>
-                    </div>
-                </div>
-            </div>`
-        }
         function buscar(evento) {
             evento.preventDefault();
 
@@ -209,4 +192,54 @@ document.addEventListener('DOMContentLoaded', ()=> {
             console.error("Elemento não encontrado")
         }
 });
+document.addEventListener('DOMContentLoaded', ()=>{
+    const listaPokemonsDiv = document.getElementById('listaPokemon');
 
+    function gerarPoke(p) {
+                return `
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+                    <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
+                                <p class="card-text small mb-1"><strong>Região:</strong> ${p.regiao}</p>
+                                <p class="card-text small mb-2"><strong>Tipagem:</strong> <span class="badge bg-secondary">${p.tipos.join("</span> <span class='badge bg-secondary'>")}</span></p>
+                                <p class="card-text small mb-2"><strong>Favorito:</strong> ${p.favorito ? 'Sim' : 'Não'}</p>
+                                <hr class="my-1">
+                                <p class="card-text small text-muted text-truncate" title="${p.mostrarValores()}">
+                                ${p.mostrarValores()}
+                                </p>
+                        </div>
+                    </div>
+                </div>`
+            }
+
+    async function aparecerPokemons(identificadores) {
+        if(!listaPokemonsDiv) return;
+
+        listaPokemonsDiv.innerHTML = '<p class = "text-center">Carregando pokemons...</p>'
+
+        try{
+            const mons = await criarPokemons(identificadores, 'kanto');
+
+            if(mons && mons.length > 0)
+            {
+                const htmlMons = mons.map(gerarPoke).join('');
+                listaPokemonsDiv.innerHTML = '<div class = "row">${listaPokemonsDiv}</div>'
+                listaPokemonsDiv.innerHTML = htmlMons;
+            } else {
+                listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao carregar os dados. Tente novamente.</p>';
+            }
+        } catch (erro)
+        {
+            console.error("Erro na exibicao de pokemon: ", erro);
+            listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao exibir lista de pokemons</p>';
+        }
+    }
+    
+    const identificadoresIniciais = [1,2,3,4,5,6,7,8,9,10]
+
+    if(listaPokemonsDiv)
+    {
+        aparecerPokemons(identificadoresIniciais);
+    }
+});
