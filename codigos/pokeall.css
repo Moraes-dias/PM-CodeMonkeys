@@ -3,14 +3,13 @@
 
 }
 body{
-    margin 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display:flex;
     min-height: 100;
     background-color:lightpink;
     justify-content: center;
     align-items: flex-start;
     padding: 1rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .box-vermelha{
@@ -21,8 +20,8 @@ body{
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     position: relative;
 
-    width: 98vw;
-    max-width: 700px;
+    width: 85vw;
+    max-width: none;
     min-width: 280px;
 
     height: 95vh;
@@ -31,16 +30,18 @@ body{
 }
 
 .titulo{
+    color: aliceblue;
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     margin: 0;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-size: 1.7rem;
     font-weight: bold;
     user-select: none;
 }
 
 .conteudo{
+    display: flex;
     margin-top: 5rem;
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.5;
@@ -53,3 +54,15 @@ body{
         max-height: none;
     }
 }
+
+.left-btn form, .left-btn ol{
+    display:flex ;
+    flex-direction: column;
+    gap:10px;
+    border-radius: 15px;
+
+    margin-bottom: 10px;
+    padding: 1rem 2rem;
+}
+
+
