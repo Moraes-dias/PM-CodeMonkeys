@@ -36,7 +36,7 @@ class status extends pokemon
     }
     mostrarValores() //mostrar somente os status
     {
-        return `hp: ${this.hp} atk fisico: ${this.atkFisico} defesa fisica: ${this.defFisica} ataque especial: ${this.atkEspecial} defesa especial: ${this.defEspecial} velocidade: ${this.velocidade}`
+        return `HP: ${this.hp} ATK fisico: ${this.atkFisico} DEF fisica: ${this.defFisica} ATK especial: ${this.atkEspecial} DEF especial: ${this.defEspecial} VEL: ${this.velocidade}`
     }
 }
 
@@ -134,6 +134,23 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
     const buscador = document.getElementById('busca')
     const resultado = document.getElementById('resultado')
+        function gerarPoke(poke) {
+            return `
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+                <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
+                            <p class="card-text small mb-1"><strong>Região:</strong> ${p.regiao}</p>
+                            <p class="card-text small mb-2"><strong>Tipagem:</strong> <span class="badge bg-secondary">${p.tipos.join("</span> <span class='badge bg-secondary'>")}</span></p>
+                            <p class="card-text small mb-2"><strong>Favorito:</strong> ${p.favorito ? 'Sim' : 'Não'}</p>
+                            <hr class="my-1">
+                            <p class="card-text small text-muted text-truncate" title="${p.mostrarValores()}">
+                            ${p.mostrarValores()}
+                            </p>
+                    </div>
+                </div>
+            </div>`
+        }
         function buscar(evento) {
             evento.preventDefault();
 
