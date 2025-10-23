@@ -216,8 +216,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     async function aparecerPokemons(identificadores) {
         if(!listaPokemonsDiv) return;
 
-        listaPokemonsDiv.innerHTML = '<p class = "text-center">Carregando pokemons...</p>'
-
         try{
             const mons = await criarPokemons(identificadores, 'kanto');
 
@@ -236,10 +234,44 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
     
-    const identificadoresIniciais = [1,2,3,4,5,6,7,8,9,10]
+    
 
     if(listaPokemonsDiv)
     {
-        aparecerPokemons(identificadoresIniciais);
+        async function carregarTudoAuto() {
+            
+            listaPokemonsDiv.innerHTML = '<p class = "text-center">Carregando pokemons...</p>'
+
+            try
+            {
+                const limite = 1025;
+                const limitURL = `https://pokeapi.co/api/v2/pokemon?limit=${limite}`;
+
+                const response = await fetch(limitURL);
+
+                if(!response.ok) throw new Error("Falha ao carregar a lista de pokemons");
+
+                const data = await response.json();
+
+                const ids = data.results.map(p => {
+                    const parts = p.url.split('/');
+
+                    return parts[parts.length - 2];
+                });
+
+                if(ids.length > 0)
+                {
+                    await aparecerPokemons(ids)
+                }
+                else{
+                    listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger"> Não foi possível obter as informações</p>'
+                }
+            } catch(error)
+            {
+                console.error("Erro no carregamento automatico", error);
+                listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
+            }
+        }
+        carregarTudoAuto();
     }
 });
