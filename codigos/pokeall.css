@@ -55,14 +55,17 @@ body{
     }
 }
 
-.left-btn form, .left-btn ol{
+.left-btn{
+   border: 3px solid black;
+   border-radius: 8px;
+}
+
+.left-btn form, .left-btn ol{ 
     display:flex ;
     flex-direction: column;
-    gap:10px;
+    gap:15px;
     border-radius: 15px;
-
-    margin-bottom: 10px;
-    padding: 1rem 2rem;
+    padding: 0.3rem 0.8rem;
 }
 
 
