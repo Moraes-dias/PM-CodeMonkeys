@@ -20,7 +20,7 @@ body{
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     position: relative;
 
-    width: 85vw;
+    width: 89vw;
     max-width: none;
     min-width: 280px;
 
@@ -46,6 +46,7 @@ body{
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.5;
     overflow-y: auto;
+    height: 30rem;
 }
 
 @media (max-width: 600px){
@@ -55,14 +56,18 @@ body{
     }
 }
 
-.left-btn form, .left-btn ol{
+.left-btn{
+   border: 3px solid black;
+   border-radius: 20px;
+}
+
+.left-btn form, .left-btn ol{ 
     display:flex ;
     flex-direction: column;
-    gap:10px;
+    gap:15px;
     border-radius: 15px;
-
-    margin-bottom: 10px;
-    padding: 1rem 2rem;
+    padding: 0.3rem 0.8rem;
 }
+
 
 
