@@ -146,43 +146,9 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 return;
             }
 
-            resultado.innerHTML = `Buscando ${termo.toLowerCase()}...`;
+            localStorage.setItem('termoBusca', termo.toLowerCase())
 
-
-            exibicao([termo]);
-        }
-
-
-        async function exibicao(identificadores)
-        {
-            try{
-                const listaPokemons = await criarPokemons(identificadores, 'Região Desconhecida');
-
-                if(listaPokemons && listaPokemons.length > 0)
-                {
-                    const pokemonEncontrado = listaPokemons[0]
-
-                    const htmlConteudo =
-                    `
-                    <h2>${pokemonEncontrado.numDex} ${pokemonEncontrado.nome}</h2>
-                    <p>Região: ${pokemonEncontrado.regiao}</p>
-                    <p>Tipo: ${pokemonEncontrado.tipos.join(" / ")}</p>
-                    <p>Favorito: ${pokemonEncontrado.favorito ? 'sim' : 'não'}</p>
-                    <hr>
-                    <h3>Status</h3>
-                    <p>${pokemonEncontrado.mostrarValores()}</p>
-                    `;
-
-                    resultado.innerHTML = htmlConteudo;
-                } else {
-                    resultado.innerHTML = `<p style = "color: red;">Pokemon "${identificadores}" não encontrado. Tente outro nome/ID`
-                }
-            } catch (erro){
-                console.error("Erro na busca e exibição: ", erro)
-                resultado.innerHTML = `<p style = "color: red;">Um erro inesperado aconteceu: ${erro.messsage}</p>`
-            }
-
-
+            window.location.href = 'pokeall.html'
         }
 
 
