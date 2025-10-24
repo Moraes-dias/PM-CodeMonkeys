@@ -3,75 +3,117 @@
 body {
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
     font-family: 'Courier New', Courier, monospace;
     background-image: url('https://i.pinimg.com/736x/b0/c0/13/b0c013d0e19dfab5535f7c22f8ffd037.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
 }
 
 /* NAVBAR */
-#navegar {
-    width: 100%;
-    background-color: rgb(132, 17, 17);
-    border-bottom: 15px solid #000;
-}
+.navBar 
+{
 
-.container-principal {
-    max-width: 1100px;
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* logo à esquerda, links à direita */
+    background-color: brown;
     align-items: center;
-    padding: 20px;
-    font-size: 18px;
+    height: 56px;
+
 }
 
-/* LOGO */
-.logo {
-    color: black;
-    text-decoration: none;
-    padding: 10px 15px;
-    font-weight: bold;
-    font-size: 22px;
+.logoBar img
+{
+    height: 56px;
+    margin: 10px;
+    margin-right: 10px;
 }
 
-.logo:hover {
-    color: white;
-    background-color: black;
-    border-radius: 15px;
-}
-
-/* LINKS */
-.navbar-nav {
+.textobar
+{
     display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    align-items: center;
+    justify-content: start;
+    font-size: 30px;
+    width: 20%;
 }
 
-.navbar-nav li {
-    margin-left: 15px; /* espaçamento entre links */
+.linkBar 
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20%;
+    gap: 20px;
 }
 
-.nav-link {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    padding: 10px 15px;
-    transition: 0.3s;
+
+.linkBar button
+{   
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: aqua;
+    padding: 1px;
+    cursor: pointer;
 }
 
-.nav-link.active {
-    color: #f0f0f0;
+
+span 
+{
+    color: #793300;
 }
 
-.nav-link:hover {
-    background-color: black;
-    color: whitesmoke;
-    border-radius: 15px;
+
+#botoes
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
 }
+.botao
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+}
+
+#botaoSubmit
+{
+    background-image: linear-gradient(90deg, rgba(255, 0, 0, 0.482) 10%, rgba(21, 0, 255, 0.482) 90%);
+}
+
+.botao form
+{
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+#busca
+{
+    border: 3px solid rgb(92, 46, 46);
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+
+
+
+
+
 
 /* RESPONSIVO */
 @media (max-width: 600px) {
