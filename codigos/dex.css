@@ -1,11 +1,77 @@
-body
-{
+/* pokedex.css */
+
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     width: 100vw;
     height: 100vh;
+
+    font-family: 'Courier New', Courier, monospace;
+    background-image: url('https://i.pinimg.com/736x/b0/c0/13/b0c013d0e19dfab5535f7c22f8ffd037.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
 }
+
+/* NAVBAR */
+.navBar 
+{
+
+    display: flex;
+    background-color: brown;
+    align-items: center;
+    height: 56px;
+
+}
+
+.logoBar img
+{
+    height: 56px;
+    margin: 10px;
+    margin-right: 10px;
+}
+
+.textobar
+{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 30px;
+    width: 20%;
+}
+
+.linkBar 
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20%;
+    gap: 20px;
+}
+
+
+.linkBar button
+{   
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: aqua;
+    padding: 1px;
+    cursor: pointer;
+}
+
+
+span 
+{
+    color: #793300;
+}
+
+
 #botoes
 {
     width: 100%;
@@ -23,6 +89,13 @@ body
     flex-direction: column;
     height: fit-content;
     width: fit-content;
+    border-radius: 15px;
+}
+
+#botaoSubmit
+{
+    background-image: linear-gradient(90deg, rgba(255, 0, 0, 0.482) 10%, rgba(21, 0, 255, 0.482) 90%);
+      border-radius: 15px;
 }
 
 .botao form
@@ -38,11 +111,65 @@ body
     width: 100%;
 }
 
-#botaoSubmit
-{
-    background-image: linear-gradient(90deg, rgba(255, 0, 0, 0.482) 10%, rgba(21, 0, 255, 0.482) 90%);
+
+
+@media (max-width: 768px) {
+    
+    body {
+    
+        overflow-y: auto; 
+    }
+
+  
+
+    .navBar {
+        flex-direction: column; 
+        height: auto;           
+        padding: 10px;
+    }
+
+    .textobar {
+        width: 100%;            
+        justify-content: center; 
+        margin-bottom: 10px;   
+    }
+
+    .linkBar {
+        width: 100%;             
+        justify-content: center; 
+        padding-right: 0;       
+        gap: 10px;               
+    }
+
+    
+
+    .botao {
+        width: 90%; 
+    }
+
+    .botao form {
+        width: 100%; 
+    }
+    
+    label[for="busca"] {
+        width: 100%;
+    }
+
+    #busca {
+       
+        box-sizing: border-box; 
+    }
 }
-/*interfacePokedex*/
 
 
+/* Ajustes extras para celulares (telas bem pequenas) */
+@media (max-width: 480px) {
+    .linkBar {
+        flex-direction: column; 
+        align-items: center;  
+    }
 
+    .linkBar button {
+        width: 80%; 
+    }
+}
