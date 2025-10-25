@@ -1,6 +1,6 @@
 class pokemon
 {
-    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
+    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)q
     /*
         construtor do pokemon necessario fazer 2 classes uma para o
         o pokemon em si e uma para os status para assim evitar linhas desnecessarias
@@ -37,7 +37,7 @@ class status extends pokemon
     mostrarValores() //mostrar somente os status
     {
         return `HP: ${this.hp} ATK fisico: ${this.atkFisico} DEF fisica: ${this.defFisica} ATK especial: ${this.atkEspecial} DEF especial: ${this.defEspecial} VEL: ${this.velocidade}`
-    }
+    }
 }
 
 class user{
@@ -151,11 +151,24 @@ document.addEventListener('DOMContentLoaded', ()=> {
             window.location.href = 'pokeall.html'
         }
 
-
     if(form){
             form.addEventListener('submit', buscar)
         } else {
             console.error("Elemento não encontrado")
+        }
+        
+        async function achado()
+        {
+          const termoBusca = localStorage.getItem('termoBusca', termoBusca.toLowerCase());
+          
+          if(termoBusca)
+          {
+            console.log("item recuperado")
+            
+            localStorage.removeItem('termoBusca');
+            if(!termoBusca)
+            
+          }
         }
 });
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -178,7 +191,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     </div>
                 </div>`
             }
-
     async function aparecerPokemons(identificadores) {
         if(!listaPokemonsDiv) return;
 
