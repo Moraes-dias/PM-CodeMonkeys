@@ -15,8 +15,8 @@ class pokemon
     descricao() //metodo para mostrar as caracteristicas do pokemon
     {
         const favoritado = this.favorito ? 'sim' : 'nao';
-        return `#${this.numDex} ${this.nome} ${this.regiao} Tipagem: ${this.tipos.join(", ")} favorito: ${favoritado}`    }
-
+        return `#${this.numDex} ${this.nome} ${this.regiao} Tipagem: ${this.tipos.join(", ")} favorito: ${favoritado}`
+    }
 }
 
 
@@ -37,7 +37,7 @@ class status extends pokemon
     mostrarValores() //mostrar somente os status
     {
         return `HP: ${this.hp} ATK fisico: ${this.atkFisico} DEF fisica: ${this.defFisica} ATK especial: ${this.atkEspecial} DEF especial: ${this.defEspecial} VEL: ${this.velocidade}`
-    }
+    }
 }
 
 class user{
@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
             window.location.href = 'pokeall.html'
         }
 
-
     if(form){
             form.addEventListener('submit', buscar)
         } else {
@@ -160,7 +159,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 });
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
-
+    const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
                 return `
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
@@ -178,7 +177,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     </div>
                 </div>`
             }
-
     async function aparecerPokemons(identificadores) {
         if(!listaPokemonsDiv) return;
 
@@ -188,7 +186,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(mons && mons.length > 0)
             {
                 const htmlMons = mons.map(gerarPoke).join('');
-                listaPokemonsDiv.innerHTML = '<div class = "row">${listaPokemonsDiv}</div>'
+                //listaPokemonsDiv.innerHTML = '<div class = "row">${listaPokemonsDiv}</div>'
                 listaPokemonsDiv.innerHTML = htmlMons;
             } else {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao carregar os dados. Tente novamente.</p>';
@@ -240,4 +238,57 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
         carregarTudoAuto();
     }
+    async function exibicao(identificadores)
+    {
+        const resultadoBuscaDiv = document.getElementById(`buscaPronta`)
+
+        if(!resultadoBuscaDiv) return; //cancelamento funcao
+
+        resultadoBuscaDiv.innerHTML = '<p class= "text-center">Buscando Pokemon...</p>'
+
+        try{
+            const listaPokemons = await criarPokemons(identificadores, 'Região desconhecida')
+
+            if(listaPokemons && listaPokemons.length > 0)
+            {
+                const achou = listaPokemons[0];
+
+                const conteudoAchou = `
+                    <div class = "card shadow-lg h-100 border-success">
+                        <div class = "card-body">
+                            <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
+                            <hr>
+                            <p><strong>#${achou.numDex}</strong></p>
+                            <p><strong>Região: </strong>${achou.regiao}</p>
+                            <p><strong>Tipo:</strong>${achou.tipos.join(" / ")}</p>
+                            <p><strong>Favorito:</strong>${achou.favorito ? 'sim' : 'não'}</p>
+                            <h5>Status</h5>
+                            <p>${achou.mostrarValores()}</p>
+                        </div>
+                    </div>
+                `;
+                resultadoBuscaDiv.innerHTML = conteudoAchou;
+            } else {
+                resultadoBuscaDiv.innerHTML = `<p class = "alert alert-danger">Pokemon"${identificadores[0]}" não encontrado </p>`
+            }
+        } catch (erro) {
+            console.error("Erro na busca e exibição única: ", erro);
+            resultadoBuscaDiv.innerHTML  = `<p class = "alert alert-danger">Erro inesperado ao buscar pokemon</p>`
+        }
+    }
+
+    if(termoBusca)
+    {
+        localStorage.removeItem('termoBusca')
+        exibicao([termoBusca]);
+    } else {
+        const resultadoBuscaDiv = document.getElementById('buscaPronta')
+
+        if(resultadoBuscaDiv)
+        {
+            resultadoBuscaDiv.innerHTML = '';
+            resultadoBuscaDiv.classList.add('escondido')
+        }
+    }
 });
+
