@@ -1,3 +1,15 @@
+function obterFavs()
+{
+    const favsJSON = localStorage.getItem('favoritos');
+    return favsJSON ? JSON.parse(favsJSON) : []
+}
+
+function saveFav(favoritos)
+{
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+}
+
+
 class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
@@ -75,13 +87,14 @@ function mapeamentoStatus(dados, regiaoPadrao = 'desconhecida')
         acc[infoStatus.stat.name] = infoStatus.base_stat;
         return acc;
     }, {});
-
+    const favoritos = obterFavs();
+    const isFavorito = favoritos.includes(numDex)
     return new status(
         numDex,
         nome,
         regiaoPadrao,
         tipos,
-        false,
+        isFavorito,
         mapeamentoStatus['hp'],
         mapeamentoStatus['attack'],
         mapeamentoStatus['defense'],
@@ -159,13 +172,27 @@ document.addEventListener('DOMContentLoaded', ()=> {
 });
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
+    
+    const btnFiltroFav = document.getElementById('favs');
+    const btnMostraTudo = document.getElementById('mostrarDex')
+    const btnRandom = document.getElementById('random');
+
+    let todosIds = [];
+
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
+        const coracao = p.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
+
                 return `
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
                     <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
                         <div class="card-body">
-                            <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
+                            <div class = "d-flex justify-content-beetween align-items-center">
+                                <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
+                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id="${p.numDex}" style = "border: none; background: none;">
+                                    <i class = "${coracao} fs-4"></i>
+                                </button>
+                            </div>
                                 <p class="card-text small mb-1"><strong>Região:</strong> ${p.regiao}</p>
                                 <p class="card-text small mb-2"><strong>Tipagem:</strong> <span class="badge bg-secondary">${p.tipos.join("</span> <span class='badge bg-secondary'>")}</span></p>
                                 <p class="card-text small mb-2"><strong>Favorito:</strong> ${p.favorito ? 'Sim' : 'Não'}</p>
@@ -197,8 +224,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
             listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao exibir lista de pokemons</p>';
         }
     }
+
     
-    
+    function favoritar(numDex)
+    {
+        numDex = parseInt(numDex, 10);
+        let favoritos = obterFavs();
+
+        const index = favoritos.indexOf(numDex);
+        if(index > -1)
+        {
+            favoritos.splice(index, 1);
+            console.log(`Pokemon #${numDex} removido dos favoritos`)
+        } else {
+            favoritos.push(numDex);
+            console.log(`Pokemon #${numDex} adicionado aos favoritos`)
+        }
+        saveFav(favoritos);
+    }
+    document.addEventListener('click', (fav) =>{
+        const btnFavorito = fav.target.closest('.favorito-btn');
+
+        if(btnFavorito)
+        {
+            const numDex = btnFavorito.dataset.dexId;
+
+            favoritar(numDex)
+
+            const icone = btnFavorito.querySelector('i');
+
+            const estaFavorito = icone.classList.contains('fa-solid');
+
+            icone.classList.toggle('fa-solid', !estaFavorito);
+            icone.classList.toggle('fa-regular', estaFavorito);
+            icone.classList.toggle('text-danger', !estaFavorito);
+            icone.classList.toggle('text-secondary', estaFavorito);
+        }
+    })//botao favoritos
 
     if(listaPokemonsDiv)
     {
@@ -222,8 +284,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                     return parts[parts.length - 2];
                 });
+                
+                todosIds = ids;
+                //verificacao de filtro inicial
+                const deveFiltrar = localStorage.getItem('filtrarFavoritos');
 
-                if(ids.length > 0)
+                if(deveFiltrar === 'true')
+                {
+                    localStorage.removeItem('filtrarFavoritos');
+                    aplicarFiltroFavs();
+                }else 
+                    if(ids.length > 0)
                 {
                     await aparecerPokemons(ids)
                 }
@@ -236,12 +307,41 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
             }
         }
+
         carregarTudoAuto();
+        function aplicarFiltroFavs()
+        {
+            const favoritos = obterFavs();
+
+            const idsFavs = favoritos.map(id => parseInt(id, 10));
+
+            const idFiltrar = todosIds.filter(id =>{
+                return idsFavs.includes(parseInt(id, 10))
+            });
+            if(idFiltrar.length > 0)
+            {
+                aparecerPokemons(idFiltrar);
+            } else {
+                listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Voce não possui pokemons favoritos!</p>'
+            }
+        }
+        if(btnFiltroFav)
+        {
+            btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
+        }
+        if(btnMostraTudo) {
+            btnMostraTudo.addEventListener('click', ()=> {
+                if(todosIds.length > 0)
+                {
+                    carregarTudoAuto();
+                }
+            })
+        }
     }
     async function exibicao(identificadores)
     {
         const resultadoBuscaDiv = document.getElementById(`buscaPronta`)
-
+        
         if(!resultadoBuscaDiv) return; //cancelamento funcao
 
         resultadoBuscaDiv.innerHTML = '<p class= "text-center">Buscando Pokemon...</p>'
@@ -252,11 +352,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(listaPokemons && listaPokemons.length > 0)
             {
                 const achou = listaPokemons[0];
-
+                const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">
-                            <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
+                            <div class = "d-flex justify-content-beetween align-items-center
+                                <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
+                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" sytle = "border: none; background: none;">
+                                    <i class = "${coracaoBusca} fs-4"></i>
+                                </button>
+                            </div>
                             <hr>
                             <p><strong>#${achou.numDex}</strong></p>
                             <p><strong>Região: </strong>${achou.regiao}</p>
@@ -290,5 +395,51 @@ document.addEventListener('DOMContentLoaded', ()=>{
             resultadoBuscaDiv.classList.add('escondido')
         }
     }
+
+    function aleatorio()
+    {
+        const minimo = Math.ceil(1);
+        const maximo = Math.floor(1025);
+
+        const idRandom = Math.floor(Math.random() * (maximo - minimo +1)) + minimo;
+
+        exibicao([idRandom]);
+    }
+
+    if(btnRandom)
+    {
+        btnRandom.addEventListener('click', aleatorio);
+    }
 });
 
+function irFavs()
+{
+    console.log('funcionou')
+    localStorage.setItem('filtrarFavoritos', 'true');
+
+    window.location.href = 'pokeall.html'
+}
+
+
+
+/*
+
+logo antes btnMostrarTudo
+if(btnFiltroFav) 
+        {
+            btnFiltroFav.addEventListener('click', () => {
+                const favoritos = obterFavs();
+
+                const idsFavs = favoritos.map(id => parseInt(id, 10));
+
+                const idFiltrar = todosIds.filter(id => {
+                    return idsFavs.includes(parseInt(id, 10));
+                });
+                if(idFiltrar.length > 0)
+                {
+                    aparecerPokemons(idFiltrar);
+                } else {
+                    listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Você não possui Pokemon favoritos!</p>'
+                }
+            });
+        } */
