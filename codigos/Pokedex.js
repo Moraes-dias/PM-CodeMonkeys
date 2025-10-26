@@ -4,10 +4,12 @@ function obterFavs()
     return favsJSON ? JSON.parse(favsJSON) : []
 }
 
-function saveFav()
+function saveFav(favoritos)
 {
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
+
+
 class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
@@ -170,6 +172,13 @@ document.addEventListener('DOMContentLoaded', ()=> {
 });
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
+    
+    const btnFiltroFav = document.getElementById('favs');
+    const btnMostraTudo = document.getElementById('mostrarDex')
+    const btnRandom = document.getElementById('random');
+
+    let todosIds = [];
+
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
         const coracao = p.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
@@ -252,6 +261,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             icone.classList.toggle('text-secondary', estaFavorito);
         }
     })//botao favoritos
+
     if(listaPokemonsDiv)
     {
         async function carregarTudoAuto() {
@@ -274,8 +284,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                     return parts[parts.length - 2];
                 });
+                
+                todosIds = ids;
+                //verificacao de filtro inicial
+                const deveFiltrar = localStorage.getItem('filtrarFavoritos');
 
-                if(ids.length > 0)
+                if(deveFiltrar === 'true')
+                {
+                    localStorage.removeItem('filtrarFavoritos');
+                    aplicarFiltroFavs();
+                }else 
+                    if(ids.length > 0)
                 {
                     await aparecerPokemons(ids)
                 }
@@ -288,12 +307,41 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
             }
         }
+
         carregarTudoAuto();
+        function aplicarFiltroFavs()
+        {
+            const favoritos = obterFavs();
+
+            const idsFavs = favoritos.map(id => parseInt(id, 10));
+
+            const idFiltrar = todosIds.filter(id =>{
+                return idsFavs.includes(parseInt(id, 10))
+            });
+            if(idFiltrar.length > 0)
+            {
+                aparecerPokemons(idFiltrar);
+            } else {
+                listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Voce não possui pokemons favoritos!</p>'
+            }
+        }
+        if(btnFiltroFav)
+        {
+            btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
+        }
+        if(btnMostraTudo) {
+            btnMostraTudo.addEventListener('click', ()=> {
+                if(todosIds.length > 0)
+                {
+                    carregarTudoAuto();
+                }
+            })
+        }
     }
     async function exibicao(identificadores)
     {
         const resultadoBuscaDiv = document.getElementById(`buscaPronta`)
-
+        
         if(!resultadoBuscaDiv) return; //cancelamento funcao
 
         resultadoBuscaDiv.innerHTML = '<p class= "text-center">Buscando Pokemon...</p>'
@@ -304,11 +352,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(listaPokemons && listaPokemons.length > 0)
             {
                 const achou = listaPokemons[0];
-
+                const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">
-                            <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
+                            <div class = "d-flex justify-content-beetween align-items-center
+                                <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
+                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" sytle = "border: none; background: none;">
+                                    <i class = "${coracaoBusca} fs-4"></i>
+                                </button>
+                            </div>
                             <hr>
                             <p><strong>#${achou.numDex}</strong></p>
                             <p><strong>Região: </strong>${achou.regiao}</p>
@@ -342,5 +395,51 @@ document.addEventListener('DOMContentLoaded', ()=>{
             resultadoBuscaDiv.classList.add('escondido')
         }
     }
+
+    function aleatorio()
+    {
+        const minimo = Math.ceil(1);
+        const maximo = Math.floor(1025);
+
+        const idRandom = Math.floor(Math.random() * (maximo - minimo +1)) + minimo;
+
+        exibicao([idRandom]);
+    }
+
+    if(btnRandom)
+    {
+        btnRandom.addEventListener('click', aleatorio);
+    }
 });
 
+function irFavs()
+{
+    console.log('funcionou')
+    localStorage.setItem('filtrarFavoritos', 'true');
+
+    window.location.href = 'pokeall.html'
+}
+
+
+
+/*
+
+logo antes btnMostrarTudo
+if(btnFiltroFav) 
+        {
+            btnFiltroFav.addEventListener('click', () => {
+                const favoritos = obterFavs();
+
+                const idsFavs = favoritos.map(id => parseInt(id, 10));
+
+                const idFiltrar = todosIds.filter(id => {
+                    return idsFavs.includes(parseInt(id, 10));
+                });
+                if(idFiltrar.length > 0)
+                {
+                    aparecerPokemons(idFiltrar);
+                } else {
+                    listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Você não possui Pokemon favoritos!</p>'
+                }
+            });
+        } */
