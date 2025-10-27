@@ -121,7 +121,7 @@ body{
     padding: 0.150rem 0.5rem;
 }
 
-#music{
+#favs{/*era musica*/
     margin-left: 10px;
     margin-right: 10px;
     color:white;
@@ -131,12 +131,12 @@ body{
     background-color: gray;
     transition: all 0.3s ease;
 
-}#music:hover{
+}#favs:hover{/*era musica*/
     filter:brightness(1.2);
     transition:all 0.3s ease;
 }
 
-#settings{
+#mostrarDex{ /*era settings*/
     margin-left: 10px;
     margin-right: 10px;
     color: white;
@@ -147,7 +147,7 @@ body{
     transition: all 0.3s ease;
 }
 
-#settings:hover{
+#mostrarDex:hover{/*era setting*/
     transition: all 0.3s ease;
     filter:brightness(1.2)
 }
