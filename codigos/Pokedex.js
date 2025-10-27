@@ -71,7 +71,7 @@ class user{
 *@param {string} regiaoPadrao//no caso os parametros, tipo de dado(object é JSON) e o nome do parametro/variavel
 *@returns {status}//aqui é a saída esperada, no caso um objeto status
 */
-function mapeamentoStatus(dados, regiaoPadrao = 'desconhecida')
+async function mapeamentoStatus(dados)
  {
     const numDex = dados.id;
     //aqui eu pego o nome e o id da api e falo que a primeira letra é maiuscula e junto com o resto do nome
@@ -87,12 +87,27 @@ function mapeamentoStatus(dados, regiaoPadrao = 'desconhecida')
         acc[infoStatus.stat.name] = infoStatus.base_stat;
         return acc;
     }, {});
+
+    //try catch para regiao
+    let regiao = 'desconhecida'
+    try{
+        const specie =  await fetch(dados.species.url)
+        const dadoEspecie = await specie.json();
+
+        const region = await fetch(dadoEspecie.generation.url)
+        const regionData = await region.json();
+
+        regiao = regionData.main_region.name.charAt(0).toUpperCase() + regionData.main_region.name.slice(1);
+    } catch(e)
+    {
+        console.warn(`Não foi possível buscar a região de ${nome}:`, e.message);
+    }
     const favoritos = obterFavs();
     const isFavorito = favoritos.includes(numDex)
     return new status(
         numDex,
         nome,
-        regiaoPadrao,
+        regiao,
         tipos,
         isFavorito,
         mapeamentoStatus['hp'],
@@ -114,16 +129,16 @@ function mapeamentoStatus(dados, regiaoPadrao = 'desconhecida')
  * @returns {Promise<array<status>>} retorna a promise
  */
 
-async function criarPokemons(identificadores, regiaoPadrao = 'desconhecida') {
+async function criarPokemons(identificadores) {
     const linkUrl = "https://pokeapi.co/api/v2/pokemon/"
-
+    console.log("🔍 criarPokemons chamado com:", identificadores);
     const buscarPromise = identificadores.map(id =>
         fetch(`${linkUrl}${String(id).toLowerCase()}`)
     );
-
     try {
         //o await faz com que as promises sejam terminadas
         const respostas = await Promise.all(buscarPromise);
+        console.log("✅ respostas recebidas:", respostas.length);
 
         const respostaPromise = respostas.map(resposta =>{
             if(!resposta.ok) {
@@ -134,11 +149,21 @@ async function criarPokemons(identificadores, regiaoPadrao = 'desconhecida') {
         });
 
         const tudoCompleto = await Promise.all(respostaPromise);
-
-        const listaPokemons = tudoCompleto.map(dados => mapeamentoStatus(dados, 'Kanto'));
+        console.log("✅ JSONs convertidos:", tudoCompleto.length);
+        const listaPokemons = await Promise.all(tudoCompleto.map(async (dados) =>{
+            try{
+                return await mapeamentoStatus(dados)
+            } catch (err){
+                console.log('erro dentro do mapeamento de dados', err)
+                throw err;
+            }
+        })
+    )
+        console.log("✅ listaPokemons criada:", listaPokemons.length);
         return listaPokemons;
     } catch (erro) {
         console.error("Um erro ocorreu durante a busca de dados em lote: ", erro.message)
+        return [];
     }
 }
 
@@ -187,7 +212,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
                     <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
                         <div class="card-body">
-                            <div class = "d-flex justify-content-beetween align-items-center">
+                            <div class = "d-flex justify-content-between align-items-center">
                                 <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
                                 <button class = "btn btn-sm p-0 favorito-btn" data-dex-id="${p.numDex}" style = "border: none; background: none;">
                                     <i class = "${coracao} fs-4"></i>
@@ -208,7 +233,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(!listaPokemonsDiv) return;
 
         try{
-            const mons = await criarPokemons(identificadores, 'kanto');
+            const mons = await criarPokemons(identificadores);
 
             if(mons && mons.length > 0)
             {
@@ -356,9 +381,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">
-                            <div class = "d-flex justify-content-beetween align-items-center
+                            <div class = "d-flex justify-content-between align-items-center>
                                 <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
-                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" sytle = "border: none; background: none;">
+                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" style = "border: none; background: none;">
                                     <i class = "${coracaoBusca} fs-4"></i>
                                 </button>
                             </div>
