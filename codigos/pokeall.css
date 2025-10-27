@@ -12,6 +12,11 @@ body{
     padding: 1rem;
 }
 
+.escondido
+{
+    position: none !important;/*important garante que sobrescreva todo resto*/
+}
+
 .box-vermelha{
     display: flex;
     background-color: red;
