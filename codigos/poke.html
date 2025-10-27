@@ -11,6 +11,10 @@
     <!--ICONES-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+    <!--FONTE-->
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -28,8 +32,8 @@
 
             <div class="linkBar">
                 <button><i class="fa-solid fa-house"></i>home</button>
-                <button><i class="fa-solid fa-book"></i>Pokédex</button>
-                <button><i class="fa-solid fa-star"></i>Favoritos</button>
+                <button onclick="window.location.href='pokeall.html'"><i class="fa-solid fa-book"></i>Pokédex</button>
+                <button onclick="irFavs()"><i class="fa-solid fa-star"></i>Favoritos</button>
                 <button><i class="fa-solid fa-user"></i></button>
                 </div>
             </div>
@@ -39,11 +43,12 @@
 
     <nav id="botoes" class="position-relative">
         <div class="botao position-absolute top-50 start-50 translate-middle">
-            <form action="GET" id="form-busca">
+            <form action="" id="form-busca">
                 <label for="busca"> <input type="search" id="busca" name="procura" placeholder="Digite o nome do pokemon" value="">
 
                 </label>
                 <button type="submit" id="botaoSubmit">Procurar</button>
+                <h3 class="subtitulo">DESCUBRA O MUNDO POKEMON</h3> <!--subtitulo-->
             </form>
         </div>
     </nav>
@@ -51,7 +56,6 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </html>
 
 
