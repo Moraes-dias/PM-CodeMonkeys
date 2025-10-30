@@ -96,7 +96,7 @@ span
 /*espaço reservado para fonte do titulo principal do site, o qual a fonte vai ser importada pois não existe no font-famiky*/
 .titulo{
     font-family: 'Pokemon Solid', sans-serif;
-    font-size: 100px;
+    font-size: 90px;
     color: rgb(198, 198, 28);
     text-align: center;
     margin: 15px;
