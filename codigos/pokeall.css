@@ -328,7 +328,7 @@ body{
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 490px) {/*telas de celular*/
     .box-vermelha {
         width: 100vw;
         padding: 1rem 0.5rem;
@@ -340,6 +340,10 @@ body{
 
     .left-btn {
         width: 100%;
+        min-width: fit-content;
+        max-width: 280px;
+        min-height: 260px;
+        max-height: max-content;
     }
 
     .navbarra {
@@ -367,12 +371,12 @@ body{
         gap: 5px;
     }
 
-    #busca, #botaoSubmit, #random, #music, #settings {
+    .btn-responsivo {
         font-size: 0.8rem;
     }
-}
+}/*media de telas celular*/
 
-/* RESPONSIVO - telas menores que 768px */
+/* RESPONSIVO - telas menores que 768px*/
 @media (max-width: 768px) {
     .box-vermelha {
         width: 95vw;
@@ -427,52 +431,6 @@ body{
     #busca, #botaoSubmit, #random, #music, #settings {
         width: 100%;
         font-size: 0.9rem;
-    }
-}
-
-/* RESPONSIVO - telas menores que 480px */
-@media (max-width: 480px) {
-    .box-vermelha {
-        width: 100vw;
-        padding: 1rem 0.5rem;
-    }
-
-    .conteudo {
-        margin-top: 3rem;
-    }
-
-    .left-btn {
-        width: 100%;
-    }
-
-    .navbarra {
-        width: 100%;
-        max-width: 100%;
-        padding: 6px 10px;
-        font-size: 0.9rem;
-    }
-
-    .row {
-        width: 100%;
-    }
-
-    .bolinhas-topo {
-        top: 0.8rem;
-        left: 0.8rem;
-    }
-
-    .bolinhas-topo .azul {
-        width: clamp(20px, 15vw, 40px);
-        height: clamp(20px, 15vw, 40px);
-    }
-
-    .bolinhas-pesquisa {
-        margin-left: 10px;
-        gap: 5px;
-    }
-
-    #busca, #botaoSubmit, #random, #music, #settings {
-        font-size: 0.8rem;
     }
 }
 
