@@ -9,6 +9,15 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
+function fechado(div) {
+    const fechar = document.getElementById('fechar')
+    fechar.addEventListener('click', ()=>{
+        if(div)
+        {
+            div.classList.add('escondido');
+        }
+    });
+}
 
 class pokemon
 {
@@ -363,12 +372,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
         }
     }
+
+
+
     async function exibicao(identificadores)
     {
         const resultadoBuscaDiv = document.getElementById(`buscaPronta`)
 
-        if(!resultadoBuscaDiv) return; //cancelamento funcao
+        if(!resultadoBuscaDiv)
+            {
+                console.log('nao foi')
+                return;
+            } //cancelamento funcao
 
+            
+        resultadoBuscaDiv.classList.remove('escondido')
         resultadoBuscaDiv.innerHTML = '<p class= "text-center">Buscando Pokemon...</p>'
 
         try{
@@ -383,6 +401,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     throw new Error(`O Pokémon #${achou.numDex} (${achou.nome}) está além do limite de 386!`);
                 }
                 const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
+
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">

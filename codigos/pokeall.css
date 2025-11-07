@@ -15,7 +15,7 @@ body{
 
 .escondido
 {
-    position: none !important;/*important garante que sobrescreva todo resto*/
+    display: none !important;/*important garante que sobrescreva todo resto*/
 }
 
 .box-vermelha{
@@ -61,10 +61,36 @@ body{
     .box-vermelha{
         height: auto;
         max-height: none;
+        flex-direction: column;
+        justify-content: center;
     }
     #favs
     {
         line-height: 1rem;
+    }
+    #listaPokemon
+    {
+        max-width: 400px;
+    }
+    .navbarra
+    {
+        position: inherit;
+        left: auto;
+    }
+    .centroColUni
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #buscaPronta:not(.escondido)
+    {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 70vw;
+        max-height: 80vh;
     }
 }
 
@@ -376,61 +402,5 @@ body{
     }
 }/*media de telas celular*/
 
-/* RESPONSIVO - telas menores que 768px*/
-@media (max-width: 768px) {
-    .box-vermelha {
-        width: 95vw;
-        height: auto;
-        padding: 1.5rem 1rem;
-    }
 
-    .conteudo {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 4rem;
-        height: auto;
-    }
-
-    .left-btn {
-        width: 90%;
-        max-width: 15rem;
-        margin-left: 0;
-        margin-bottom: 1rem;
-    }
-
-    .navbarra {
-        width: 90%;
-        max-width: 100%;
-        margin-left: 0;
-        padding: 8px 12px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .row {
-        width: 90%;
-    }
-
-    .bolinhas-topo {
-        top: 1rem;
-        left: 1rem;
-        gap: 6px;
-    }
-
-    .bolinhas-topo .azul {
-        width: clamp(25px, 10vw, 50px);
-        height: clamp(25px, 10vw, 50px);
-    }
-
-    .bolinhas-pesquisa {
-        margin-left: 20px;
-        gap: 6px;
-    }
-
-    #busca, #botaoSubmit, #random, #music, #settings {
-        width: 100%;
-        font-size: 0.9rem;
-    }
-}
 
