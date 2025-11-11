@@ -1,3 +1,4 @@
+
 function obterFavs()
 {
     const favsJSON = localStorage.getItem('favoritos');
@@ -9,6 +10,7 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
+/* descartado
 function fechado(div) {
     const fechar = document.getElementById('fechar')
     fechar.addEventListener('click', ()=>{
@@ -17,7 +19,7 @@ function fechado(div) {
             div.classList.add('escondido');
         }
     });
-}
+}*/
 
 class pokemon
 {
@@ -401,7 +403,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     throw new Error(`O Pokémon #${achou.numDex} (${achou.nome}) está além do limite de 386!`);
                 }
                 const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
-
+                
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">
@@ -410,6 +412,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                                 <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" style = "border: none; background: none;">
                                     <i class = "${coracaoBusca} fs-4"></i>
                                 </button>
+                                <button class = "btn btn-sm p-0" id = "fecharBusca"><i class = "fa-solid fa-xmark"></i></button>
                             </div>
                             <hr>
                             <p><strong>#${achou.numDex}</strong></p>
@@ -443,6 +446,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
             resultadoBuscaDiv.innerHTML = '';
             resultadoBuscaDiv.classList.add('escondido')
         }
+        document.addEventListener('click', (e)=>{
+          console.log('clique identificado')
+          const fecharBusca = e.target.closest('#fecharBusca');
+          
+          const buscaProntaEsconder = document.getElementById('buscaPronta');
+          
+          if(fecharBusca && buscaProntaEsconder)
+          {
+            console.log('escondeu')
+            buscaProntaEsconder.classList.add('escondido');
+          }
+        })
     }
 
     function aleatorio()
