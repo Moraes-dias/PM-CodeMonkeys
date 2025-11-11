@@ -9,6 +9,15 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
+function fechado(div) {
+    const fechar = document.getElementById('fechar')
+    fechar.addEventListener('click', ()=>{
+        if(div)
+        {
+            div.classList.add('escondido');
+        }
+    });
+}
 
 class pokemon
 {
@@ -197,7 +206,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 });
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
-    
+
     const btnFiltroFav = document.getElementById('favs');
     const btnMostraTudo = document.getElementById('mostrarDex')
     const btnRandom = document.getElementById('random');
@@ -250,7 +259,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-    
+
     function favoritar(numDex)
     {
         numDex = parseInt(numDex, 10);
@@ -290,12 +299,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(listaPokemonsDiv)
     {
         async function carregarTudoAuto() {
-            
+
             listaPokemonsDiv.innerHTML = '<p class = "text-center">Carregando pokemons...</p>'
 
             try
             {
-                const limite = 1025;
+                const limite = 386;
                 const limitURL = `https://pokeapi.co/api/v2/pokemon?limit=${limite}`;
 
                 const response = await fetch(limitURL);
@@ -309,7 +318,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                     return parts[parts.length - 2];
                 });
-                
+
                 todosIds = ids;
                 //verificacao de filtro inicial
                 const deveFiltrar = localStorage.getItem('filtrarFavoritos');
@@ -318,7 +327,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 {
                     localStorage.removeItem('filtrarFavoritos');
                     aplicarFiltroFavs();
-                }else 
+                }else
                     if(ids.length > 0)
                 {
                     await aparecerPokemons(ids)
@@ -363,12 +372,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
         }
     }
+
+
+
     async function exibicao(identificadores)
     {
         const resultadoBuscaDiv = document.getElementById(`buscaPronta`)
-        
-        if(!resultadoBuscaDiv) return; //cancelamento funcao
 
+        if(!resultadoBuscaDiv)
+            {
+                console.log('nao foi')
+                return;
+            } //cancelamento funcao
+
+            
+        resultadoBuscaDiv.classList.remove('escondido')
         resultadoBuscaDiv.innerHTML = '<p class= "text-center">Buscando Pokemon...</p>'
 
         try{
@@ -377,7 +395,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(listaPokemons && listaPokemons.length > 0)
             {
                 const achou = listaPokemons[0];
+                if(achou.numDex > 386) // Verifica o numDex do Pokémon
+                {
+                    // Lança um erro customizado que será capturado pelo bloco catch
+                    throw new Error(`O Pokémon #${achou.numDex} (${achou.nome}) está além do limite de 386!`);
+                }
                 const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
+
                 const conteudoAchou = `
                     <div class = "card shadow-lg h-100 border-success">
                         <div class = "card-body">
@@ -424,7 +448,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     function aleatorio()
     {
         const minimo = Math.ceil(1);
-        const maximo = Math.floor(1025);
+        const maximo = Math.floor(386);
 
         const idRandom = Math.floor(Math.random() * (maximo - minimo +1)) + minimo;
 
@@ -450,7 +474,7 @@ function irFavs()
 /*
 
 logo antes btnMostrarTudo
-if(btnFiltroFav) 
+if(btnFiltroFav)
         {
             btnFiltroFav.addEventListener('click', () => {
                 const favoritos = obterFavs();
