@@ -12,8 +12,9 @@ body{
     padding: 1rem;
 }
 
-.escondido {
-  display: none !important;
+.escondido
+{
+    display: none !important;/*important garante que sobrescreva todo resto*/
 }
 
 .box-vermelha {
@@ -56,24 +57,76 @@ body{
     .box-vermelha{
         height: auto;
         max-height: none;
+        flex-direction: column;
+        justify-content: center;
     }
     #favs
     {
         line-height: 1rem;
     }
+    #listaPokemon
+    {
+        max-width: 400px;
+    }
+    .navbarra
+    {
+        position: inherit;
+        left: auto;
+    }
+    .centroColUni
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #buscaPronta:not(.escondido)
+    {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 70vw;
+        max-height: 80vh;
+    }
 }
 
 .navbarra {
-  border-radius: 15px 15px 0 0;
-  margin-left: -12px;
-  padding: 10px 20px;
-  border: 3px solid rgb(184, 180, 180);
-  width: 40rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-left: -12px;
+    padding: 10px 20px;
+    border: 3px solid rgb(184, 180, 180);
+    width: 40rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .bolinhas {
+      display: flex;
+      gap: 8px;
+    }
+
+    .bolinha {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #555;
+    }
+
+    .texto {
+      color: #7B2CBF;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+.row{
+    width: 40rem;
+    background-color: white;
+    padding: 0px;
+    border: 3px solid rgb(184, 180, 180);
 }
 
 .bolinhas {
@@ -81,6 +134,12 @@ body{
   gap: 8px;
 }
 
+.left-btn form, .left-btn ol{
+    display:flex ;
+    flex-direction: column;
+    gap:10px;
+    padding: 0.150rem 0.5rem;
+}
 .bolinha {
   width: 12px;
   height: 12px;
@@ -133,6 +192,31 @@ body{
   border-radius: 20px;
 }
 
+#home{ /*era settings*/
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    border: 2px solid rgb(29, 129, 54);
+    box-shadow: 2px;
+    border-radius: 5px;
+    background-color: rgb(23, 158, 57);
+    transition: all 0.3s ease;
+}
+
+#home:hover{/*era setting*/
+    transition: all 0.3s ease;
+    filter:brightness(1.2)
+}
+
+#random{
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 2px solid rgb(180, 124, 18);
+    box-shadow: 2px;
+    border-radius: 5px;
+    background-color: orange;
+    transition: all 0.3s ease;
+}
 .left-btn form, .left-btn ol {
   display: flex;
   flex-direction: column;
@@ -294,7 +378,7 @@ body{
     }
 
     .bolinhas-topo .azul {
-        width: 40px; 
+        width: 40px;
         height: 40px;
     }
 
@@ -311,48 +395,57 @@ body{
     {
         line-height: 1.4rem;
     }
-
 }
 
-/* === Desktops médios (1200–1599px) === */
-@media (max-width: 1599px) and (min-width: 1200px) {
-  .box-vermelha { width: 85vw; height: auto; }
-  .conteudo { font-size: 1.1rem; }
-}
+@media (max-width: 490px) {/*telas de celular*/
+    .box-vermelha {
+        width: 100vw;
+        padding: 1rem 0.5rem;
+    }
 
-/* === Tablets horizontais (992–1199px) === */
-@media (max-width: 1199px) and (min-width: 992px) {
-  .box-vermelha { width: 90vw; height: auto; }
-  .conteudo { flex-wrap: wrap; justify-content: center; }
-  .left-btn { width: 12rem; }
-}
+    .conteudo {
+        margin-top: 3rem;
+    }
 
-/* === Tablets verticais e celulares grandes (600–991px) === */
-@media (max-width: 991px) and (min-width: 600px) {
-  .box-vermelha {
-    width: 95vw;
-    height: auto;
-    padding: 1.5rem;
-  }
-  .conteudo {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 4rem;
-  }
-  .navbarra, .row {
-    width: 90%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .left-btn {
-    width: 80%;
-    margin: 0 auto 1rem;
-  }
-  #busca, #botaoSubmit, #random, #favs, #mostrarDex {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-}
+    .left-btn {
+        width: 100%;
+        min-width: fit-content;
+        max-width: 280px;
+        min-height: 260px;
+        max-height: max-content;
+    }
+
+    .navbarra {
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    .bolinhas-topo {
+        top: 0.8rem;
+        left: 0.8rem;
+    }
+
+    .bolinhas-topo .azul {
+        width: 30px;
+        height: 30px;
+    }
+
+    .bolinhas-pesquisa {
+        margin-left: 10px;
+        gap: 5px;
+    }
+
+    .btn-responsivo {
+        font-size: 0.8rem;
+    }
+}/*media de telas celular*/
+
+
 
 /* === Celulares médios (≤599px) === */
 @media (max-width: 599px) {
