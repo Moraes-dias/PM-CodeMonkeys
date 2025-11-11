@@ -485,25 +485,3 @@ function irFavs()
 }
 
 
-
-/*
-
-logo antes btnMostrarTudo
-if(btnFiltroFav)
-        {
-            btnFiltroFav.addEventListener('click', () => {
-                const favoritos = obterFavs();
-
-                const idsFavs = favoritos.map(id => parseInt(id, 10));
-
-                const idFiltrar = todosIds.filter(id => {
-                    return idsFavs.includes(parseInt(id, 10));
-                });
-                if(idFiltrar.length > 0)
-                {
-                    aparecerPokemons(idFiltrar);
-                } else {
-                    listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Você não possui Pokemon favoritos!</p>'
-                }
-            });
-        } */
