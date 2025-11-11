@@ -447,7 +447,7 @@ body{
 
 
 
-/* === Celulares médios (≤599px) === */
+/*para fazer push*//* === Celulares médios (≤599px) === */
 @media (max-width: 599px) {
   .box-vermelha {
     width: 100vw;
@@ -480,4 +480,5 @@ body{
     width: 100%;
     font-size: 0.8rem;
   }
+}
 }
