@@ -11,7 +11,6 @@ body{
     align-items: flex-start;
     padding: 1rem;
 }
-
 .escondido
 {
     display: none !important;/*important garante que sobrescreva todo resto*/
@@ -54,6 +53,11 @@ body{
 }
 
 @media (max-width: 600px){
+    .navbarra
+    {
+        max-width: 400px;
+        
+    }
     .box-vermelha{
         height: auto;
         max-height: none;
@@ -73,12 +77,12 @@ body{
         position: inherit;
         left: auto;
     }
-    .centroColUni
+    /*.centroColUni
     {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    }*/
     #buscaPronta:not(.escondido)
     {
         position: fixed;
@@ -138,6 +142,7 @@ body{
     display:flex ;
     flex-direction: column;
     gap:10px;
+    height: fit-content;
     padding: 0.150rem 0.5rem;
 }
 .bolinha {
@@ -258,19 +263,13 @@ body{
     border-radius: 5px;
     background-color: rgb(31, 31, 31);
     transition: all 0.3s ease;
+    min-width: max-content;/*tem q arrumar isso*/
 
 }
 #mostrarDex:hover { filter: brightness(1.2); }
 
-#random {
-  margin: 0 10px;
-  border: 2px solid rgb(180, 124, 18);
-  border-radius: 5px;
-  background-color: orange;
-  transition: all 0.3s ease;
-}
 #random:hover { filter: brightness(1.2); }
-
+/*
 #busca {
   margin: 0 10px;
   width: 7.4rem;
@@ -279,7 +278,7 @@ body{
   border-radius: 5px;
   background-color: rgb(31, 31, 31);
   transition: all 0.3s ease;
-}
+}*/
 #busca:hover { filter: brightness(1.8); }
 
 #botaoSubmit {
@@ -334,42 +333,46 @@ body{
     width: 75vw;
     max-width: 1400px;
     height: 85vh;
+    }
   }
   .conteudo { font-size: 1.2rem; }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .box-vermelha {
         width: 95vw;
         height: auto;
         padding: 1.5rem 1rem;
+        height: auto;
+        max-height: none;
+        flex-direction: column;
+        justify-content: center;
     }
-
+    
     .conteudo {
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         margin-top: 4rem;
         height: auto;
+        
     }
 
     .left-btn {
         width: 90%;
         max-width: 15rem;
+        height: fit-content;
         margin-left: 0;
         margin-bottom: 1rem;
+        
     }
 
     .navbarra {
-        width: 90%;
-        margin-left: 0;
         padding: 8px 12px;
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    .row {
-        width: 90%;
-    }
 
     .bolinhas-topo {
         top: 1rem;
@@ -387,10 +390,7 @@ body{
         gap: 6px;
     }
 
-    #busca, #botaoSubmit, #random, #music, #settings {
-        width: 100%;
-        font-size: 0.9rem;
-    }
+    
     #favs
     {
         line-height: 1.4rem;
@@ -447,38 +447,3 @@ body{
 
 
 
-/*para fazer push*//* === Celulares médios (≤599px) === */
-@media (max-width: 599px) {
-  .box-vermelha {
-    width: 100vw;
-    padding: 1rem;
-    border-radius: 0;
-  }
-  .titulo { font-size: 1.4rem; }
-  .conteudo {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-  }
-  .navbarra, .row {
-    width: 100%;
-    padding: 6px 10px;
-  }
-  .left-btn {
-    width: 100%;
-    margin: 0;
-  }
-  .bolinhas-topo {
-    top: 0.8rem;
-    left: 0.8rem;
-  }
-  .bolinhas-topo .azul {
-    width: clamp(25px, 12vw, 40px);
-    height: clamp(25px, 12vw, 40px);
-  }
-  #busca, #botaoSubmit, #random, #favs, #mostrarDex {
-    width: 100%;
-    font-size: 0.8rem;
-  }
-}
-}
