@@ -34,7 +34,7 @@ body{
   color: aliceblue;
   position: absolute;
   top: 1.5rem;
-  right: 1.5rem;
+  right: 2.5rem;
   margin: 0;
   font-size: 1.7rem;
   font-weight: bold;
@@ -56,7 +56,11 @@ body{
     .navbarra
     {
         max-width: 400px;
-        
+
+    }
+    #busca
+    {
+      width: 93%;
     }
     .box-vermelha{
         height: auto;
@@ -77,12 +81,7 @@ body{
         position: inherit;
         left: auto;
     }
-    /*.centroColUni
-    {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }*/
+
     #buscaPronta:not(.escondido)
     {
         position: fixed;
@@ -263,7 +262,7 @@ body{
     border-radius: 5px;
     background-color: rgb(31, 31, 31);
     transition: all 0.3s ease;
-    min-width: max-content;/*tem q arrumar isso*/
+    min-width: 91%;/*tem q arrumar isso*/
 
 }
 #mostrarDex:hover { filter: brightness(1.2); }
@@ -346,15 +345,25 @@ body{
         max-height: none;
         flex-direction: column;
         justify-content: center;
+
     }
-    
+
+    #buscaPronta:not(.escondido)
+    {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 70vw;
+        max-height: 80vh;
+    }
+
     .conteudo {
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin-top: 4rem;
         height: auto;
-        
     }
 
     .left-btn {
@@ -363,7 +372,7 @@ body{
         height: fit-content;
         margin-left: 0;
         margin-bottom: 1rem;
-        
+
     }
 
     .navbarra {
@@ -390,7 +399,7 @@ body{
         gap: 6px;
     }
 
-    
+
     #favs
     {
         line-height: 1.4rem;
@@ -402,7 +411,10 @@ body{
         width: 100vw;
         padding: 1rem 0.5rem;
     }
-
+    #busca
+    {
+      width: 93%;
+    }
     .conteudo {
         margin-top: 3rem;
     }
@@ -443,7 +455,37 @@ body{
     .btn-responsivo {
         font-size: 0.8rem;
     }
+
 }/*media de telas celular*/
+@media (max-width: 400px){
+  body
+  {
+    padding: 0;
+  }
+  .box-vermelha
+  {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
 
+  }
+  .menos400
+  {
+    max-width: 100%;
+    min-width: 100%;
+  }
+  .titulo
+  {
+    top: 1rem;
+    right: 3rem;
+  }
+  #busca
+  {
+    width: 93%;
+  }
+}
 
+@media (min-height)
+{
 
+}
