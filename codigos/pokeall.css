@@ -5,7 +5,7 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display:flex;
     flex-direction: column;
-    min-height: 100;
+    min-height: 100vh;
     background-color:lightpink;
     justify-content: center;
     align-items: flex-start;
@@ -25,10 +25,8 @@ body{
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   position: relative;
-  width: 89vw;
-  min-width: 280px;
-  height: 95vh;
-  max-height: 600px;
+  width: 1000px;
+  height: 100vh;
 }
 
 .titulo {
@@ -123,7 +121,7 @@ body{
     }
 
 .row{
-    width: 40rem;
+    width: 60re;
     background-color: white;
     padding: 0px;
     border: 3px solid rgb(184, 180, 180);
@@ -181,10 +179,10 @@ body{
 }
 
 .left-btn {
-  margin-left: 30px;
+  margin-left: 5px;
   background-color: rgb(255, 56, 56);
   width: 10rem;
-  height: 15rem;
+  height: 20rem;
   position: sticky;
   top: 0;
   padding-top: 15px;
@@ -334,10 +332,21 @@ body{
     width: 75vw;
     max-width: 1400px;
     height: 85vh;
+    overflow-y: hidden;
   }
-  .conteudo { font-size: 1.2rem; }
+  .conteudo { font-size: 1.2rem;}
+}
 
-@media (max-width: 768px) {
+@media (max-width: 1150px) {
+    .box-vermelha {
+        height: auto;
+        min-height: 100vh;
+        font-size: 15px
+
+    }
+}
+
+@media (max-width: 800px) {
     .box-vermelha {
         width: 95vw;
         height: auto;
@@ -352,7 +361,7 @@ body{
     }
 
     .left-btn {
-        width: 90%;
+        width: 100%;
         max-width: 15rem;
         margin-left: 0;
         margin-bottom: 1rem;
@@ -368,7 +377,7 @@ body{
     }
 
     .row {
-        width: 90%;
+        width: 92%;
     }
 
     .bolinhas-topo {
@@ -399,8 +408,11 @@ body{
 
 @media (max-width: 490px) {/*telas de celular*/
     .box-vermelha {
-        width: 100vw;
+        height: 100vw;
         padding: 1rem 0.5rem;
+        justify-content: center;
+        min-height: none;
+        
     }
 
     .conteudo {
@@ -467,6 +479,7 @@ body{
   .left-btn {
     width: 100%;
     margin: 0;
+    padding:0;
   }
   .bolinhas-topo {
     top: 0.8rem;
@@ -480,5 +493,4 @@ body{
     width: 100%;
     font-size: 0.8rem;
   }
-}
 }
