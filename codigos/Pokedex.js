@@ -54,19 +54,6 @@ class status extends pokemon
     }
 }
 
-class user{
-    constructor(senha = 0, email='eita' , usuario='kkkkk'){
-        this.senha = senha;
-        this.email = email;
-        this.usuario=usuario;
-    }
-    mostrarDadosUsuario()
-    {
-        return `usuario: ${this.usuario} email: ${this.email}`
-    }
-
-}
-
 /**
 * mapeamento de dados da api
 *@param {Object} dados//esses tres ajudam a entender o que a funcao vai fazer

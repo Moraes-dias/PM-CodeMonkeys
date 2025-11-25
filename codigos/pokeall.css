@@ -53,8 +53,7 @@ body{
 @media (max-width: 600px){
     .navbarra
     {
-        max-width: 400px;
-
+      max-width: 400px;
     }
     #busca
     {
