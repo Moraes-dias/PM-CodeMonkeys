@@ -1,4 +1,3 @@
-
 export class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
