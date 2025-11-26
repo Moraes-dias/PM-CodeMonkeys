@@ -1,4 +1,4 @@
-import { status } from "module";
+import { status } from "./construtores";
 
 
 /**

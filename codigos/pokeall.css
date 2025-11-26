@@ -9,7 +9,7 @@ body{
     background-color:lightpink;
     justify-content: center;
     align-items: flex-start;
-    padding: 1rem;
+    /*padding: 1rem;*/
 }
 .escondido
 {
@@ -17,17 +17,7 @@ body{
 }
 
 .box-vermelha {
- /* display: flex;
-  flex-direction: column;
-  background-color: red;
-  padding: 2rem 1rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  position: relative;
-  width: 89vw;
-  min-width: 280px;
-  height: 95vh;
-  max-height: 600px;*/
+
   display: flex;
   flex-direction: column;
   background-color: red;
@@ -35,8 +25,9 @@ body{
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   position: relative;
-  width: 1000px;
+  width: 100vw;
   height: 100vh;
+  left: 0;
 }
 
 .titulo {
