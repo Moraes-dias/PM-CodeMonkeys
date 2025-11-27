@@ -10,8 +10,6 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
-
-
 class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
@@ -155,7 +153,6 @@ async function criarPokemons(identificadores) {
         return [];
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
