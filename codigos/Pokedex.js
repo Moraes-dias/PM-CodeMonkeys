@@ -58,7 +58,6 @@ class status extends pokemon
 *@param {string} regiaoPadrao//no caso os parametros, tipo de dado(object é JSON) e o nome do parametro/variavel
 *@returns {status}//aqui é a saída esperada, no caso um objeto status
 */
-//feito pelo pedro
 async function mapeamentoStatus(dados)
  {
     const numDex = dados.id;
@@ -116,7 +115,7 @@ async function mapeamentoStatus(dados)
  * @param {Array<string | number>} identificadores
  * @returns {Promise<array<status>>} retorna a promise
  */
-//feita pelo pedro
+
 async function criarPokemons(identificadores) {
     const linkUrl = "https://pokeapi.co/api/v2/pokemon/"
     console.log("🔍 criarPokemons chamado com:", identificadores);
@@ -182,14 +181,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
             console.error("Elemento não encontrado")
         }
 });
+
+export var todosIds = [];
+
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
 
     const btnFiltroFav = document.getElementById('favs');
     const btnMostraTudo = document.getElementById('mostrarDex')
     const btnRandom = document.getElementById('random');
-
-    let todosIds = [];
 
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-//feito pedro
+
     function favoritar(numDex)
     {
         numDex = parseInt(numDex, 10);
