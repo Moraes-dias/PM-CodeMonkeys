@@ -16,7 +16,7 @@ export async function aparecerPokemons(identificadores) {
             } else {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao carregar os dados. Tente novamente.</p>';
             }
-        } catch (erro)
+        } catch (erro)//lista
         {
             console.error("Erro na exibicao de pokemon: ", erro);
             listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao exibir lista de pokemons</p>';

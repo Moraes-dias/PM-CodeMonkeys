@@ -11,7 +11,7 @@ export function buscar(evento) {
             resultado.innerHTML = "<p>Digite o nome de um pokemon da primeira geração</p>"
             return;
         }
-
+        //busca
         localStorage.setItem('termoBusca', termo.toLowerCase())
 
         window.location.href = 'pokeall.html'
