@@ -2,6 +2,7 @@ import { todosIds } from './Pokedex.js';
 import * as variaveis from './busca.js'
 import { criarPokemons } from './api.js';
 import { gerarPoke } from './criar.js';
+
 const listaPokemonsDiv = document.getElementById('listaPokemon');
 
 export async function aparecerPokemons(identificadores) {

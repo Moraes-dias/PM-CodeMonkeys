@@ -1,4 +1,6 @@
 //aqui vai filtrar tambem
+
+
 export const form = document.getElementById('form-busca');
 export const buscador = document.getElementById('busca')
 export const resultado = document.getElementById('resultado')
