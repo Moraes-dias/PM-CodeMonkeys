@@ -1,5 +1,5 @@
 import { todosIds } from './Pokedex.js';
-import * as variaveis from './controlador.js'
+import * as variaveis from './busca.js'
 import { criarPokemons } from './api.js';
 import { gerarPoke } from './criar.js';
 
