@@ -18,7 +18,7 @@ export async function aparecerPokemons(identificadores) {
             } else {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao carregar os dados. Tente novamente.</p>';
             }
-        } catch (erro)
+        } catch (erro)//lista
         {
             console.error("Erro na exibicao de pokemon: ", erro);
             listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger">Erro ao exibir lista de pokemons</p>';
@@ -68,6 +68,26 @@ export async function aparecerPokemons(identificadores) {
                 console.error("Erro no carregamento automatico", error);
                 listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
             }
+
+                if(listaPokemonsDiv)
+                    {
+                carregarTudoAuto();
+
+                if(btnFiltroFav)
+                {
+                    btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
+                }
+                if(btnMostraTudo) {
+                    btnMostraTudo.addEventListener('click', ()=> {
+                        if(todosIds.length > 0)
+                        {
+                            carregarTudoAuto();
+                        }
+                    })
+                }
+
+                }
+
         }
 
         //carregarTudoAuto();

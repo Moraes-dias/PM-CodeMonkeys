@@ -153,7 +153,7 @@ async function criarPokemons(identificadores) {
         return [];
     }
 }
-
+//feito por gregory
 document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
     const buscador = document.getElementById('busca')
