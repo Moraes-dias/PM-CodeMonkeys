@@ -66,6 +66,26 @@ export async function aparecerPokemons(identificadores) {
                 console.error("Erro no carregamento automatico", error);
                 listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
             }
+
+                if(listaPokemonsDiv)
+                    {
+                carregarTudoAuto();
+
+                if(btnFiltroFav)
+                {
+                    btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
+                }
+                if(btnMostraTudo) {
+                    btnMostraTudo.addEventListener('click', ()=> {
+                        if(todosIds.length > 0)
+                        {
+                            carregarTudoAuto();
+                        }
+                    })
+                }
+
+                }
+
         }
 
         //carregarTudoAuto();
@@ -85,22 +105,3 @@ export async function aparecerPokemons(identificadores) {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Voce não possui pokemons favoritos!</p>'
             }
         }
-
-        if(listaPokemonsDiv)
-{
-    carregarTudoAuto();
-
-    if(btnFiltroFav)
-    {
-        btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
-    }
-    if(btnMostraTudo) {
-        btnMostraTudo.addEventListener('click', ()=> {
-            if(todosIds.length > 0)
-            {
-                carregarTudoAuto();
-            }
-        })
-    }
-
-}
