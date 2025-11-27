@@ -181,14 +181,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
             console.error("Elemento não encontrado")
         }
 });
+
+export var todosIds = [];
+
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
 
     const btnFiltroFav = document.getElementById('favs');
     const btnMostraTudo = document.getElementById('mostrarDex')
     const btnRandom = document.getElementById('random');
-
-    let todosIds = [];
 
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
