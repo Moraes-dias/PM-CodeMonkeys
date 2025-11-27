@@ -3,10 +3,10 @@
 
 //vai chamar provavelmente somente global e controlador
 
-import * as inicio from './global'
+import { iniciarGlobal } from "./global";
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
-    inicio.iniciarGlobal();
+    iniciarGlobal();
 })

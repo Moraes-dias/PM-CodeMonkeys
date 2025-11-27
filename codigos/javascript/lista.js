@@ -1,5 +1,7 @@
 import { todosIds } from './Pokedex.js';
-
+import * as variaveis from './controlador.js'
+import { criarPokemons } from './api.js';
+import { gerarPoke } from './criar.js';
 const listaPokemonsDiv = document.getElementById('listaPokemon');
 
 export async function aparecerPokemons(identificadores) {
@@ -104,4 +106,23 @@ export async function aparecerPokemons(identificadores) {
             } else {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Voce não possui pokemons favoritos!</p>'
             }
+        }
+
+        if(listaPokemonsDiv)
+        {
+            carregarTudoAuto();
+
+            if(variaveis.btnFiltroFav)
+            {
+                variaveis.btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
+            }
+            if(variaveis.btnMostraTudo) {
+                variaveis.btnMostraTudo.addEventListener('click', ()=> {
+                    if(todosIds.length > 0)
+                    {
+                        carregarTudoAuto();
+                    }
+                })
+            }
+
         }
