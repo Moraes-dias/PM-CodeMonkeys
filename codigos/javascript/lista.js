@@ -1,5 +1,7 @@
 import { todosIds } from './Pokedex.js';
-
+import * as variaveis from './controlador.js'
+import { criarPokemons } from './api.js';
+import { gerarPoke } from './criar.js';
 const listaPokemonsDiv = document.getElementById('listaPokemon');
 
 export async function aparecerPokemons(identificadores) {
@@ -87,20 +89,20 @@ export async function aparecerPokemons(identificadores) {
         }
 
         if(listaPokemonsDiv)
-{
-    carregarTudoAuto();
+        {
+            carregarTudoAuto();
 
-    if(btnFiltroFav)
-    {
-        btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
-    }
-    if(btnMostraTudo) {
-        btnMostraTudo.addEventListener('click', ()=> {
-            if(todosIds.length > 0)
+            if(variaveis.btnFiltroFav)
             {
-                carregarTudoAuto();
+                variaveis.btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
             }
-        })
-    }
+            if(variaveis.btnMostraTudo) {
+                variaveis.btnMostraTudo.addEventListener('click', ()=> {
+                    if(todosIds.length > 0)
+                    {
+                        carregarTudoAuto();
+                    }
+                })
+            }
 
-}
+        }
