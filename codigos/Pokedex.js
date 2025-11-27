@@ -14,7 +14,7 @@ function saveFav(favoritos)
 
 class pokemon
 {
-    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
+    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false, spritesPronto = "string")
     /*
         construtor do pokemon necessario fazer 2 classes uma para o
         o pokemon em si e uma para os status para assim evitar linhas desnecessarias
@@ -25,6 +25,7 @@ class pokemon
         this.regiao = regiao;
         this.tipos = tipos;
         this.favorito = favorito;
+        this.spritesPronto = spritesPronto;
     }
     descricao() //metodo para mostrar as caracteristicas do pokemon
     {
@@ -37,9 +38,9 @@ class pokemon
 
 class status extends pokemon
 {
-    constructor(numDex, nome, regiao, tipos, favorito,  hp = 0,atkFisico = 0, defFisica = 0, atkEspecial = 0, defEspecial = 0, velocidade = 0)
+    constructor(numDex, nome, regiao, tipos, favorito, spritesPronto,  hp = 0,atkFisico = 0, defFisica = 0, atkEspecial = 0, defEspecial = 0, velocidade = 0)
     {
-        super(numDex, nome, regiao, tipos, favorito); //heranca das caracteristicas da classe pai (pokemon)
+        super(numDex, nome, regiao, tipos, favorito, spritesPronto); //heranca das caracteristicas da classe pai (pokemon)
 
         this.hp = hp;
         this.atkFisico = atkFisico;
@@ -81,10 +82,11 @@ async function mapeamentoStatus(dados)
     //ex: pikachu[0,1,2,3,4,5,6] 0 = p->P + 1..6 = ikachu->Pikachu
     const nome = dados.name.charAt(0).toUpperCase() + dados.name.slice(1);
     //mesma coisa que o anterior
+    //aqui puxo os sprits da pokeapi
     const tipos = dados.types.map(tipagem =>
         tipagem.type.name.charAt(0).toUpperCase() + tipagem.type.name.slice(1)
     );
-
+    let sprites = dados.sprites.front_default;
     const mapeamentoStatus = dados.stats.reduce((acc, infoStatus)=>{
         acc[infoStatus.stat.name] = infoStatus.base_stat;
         return acc;
@@ -93,6 +95,7 @@ async function mapeamentoStatus(dados)
     //try catch para regiao
     let regiao = 'desconhecida'
     try{
+
         const specie =  await fetch(dados.species.url)
         const dadoEspecie = await specie.json();
 
@@ -112,6 +115,7 @@ async function mapeamentoStatus(dados)
         regiao,
         tipos,
         isFavorito,
+        sprites,
         mapeamentoStatus['hp'],
         mapeamentoStatus['attack'],
         mapeamentoStatus['defense'],
@@ -214,6 +218,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
                     <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
                         <div class="card-body">
+                            <div class ="text-center">
+                            <img src = ${p.spritesPronto}></div>
                             <div class = "d-flex justify-content-between align-items-center">
                                 <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
                                 <button class = "btn btn-sm p-0 favorito-btn" data-dex-id="${p.numDex}" style = "border: none; background: none;">
