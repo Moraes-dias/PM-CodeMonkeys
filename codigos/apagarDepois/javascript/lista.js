@@ -1,11 +1,13 @@
-import { todosIds } from './Pokedex.js';
-import * as variaveis from './busca.js'
 import { criarPokemons } from './api.js';
 import { gerarPoke } from './criar.js';
+import { obterFavs } from "./fav.js";
 
-const listaPokemonsDiv = document.getElementById('listaPokemon');
+
+
+var todosIds = [];
 
 export async function aparecerPokemons(identificadores) {
+        const listaPokemonsDiv = document.getElementById('listaPokemon');
         if(!listaPokemonsDiv) return;
 
         try{
@@ -28,68 +30,33 @@ export async function aparecerPokemons(identificadores) {
 
 
     export async function carregarTudoAuto() {
+        const listaPokemonsDiv = document.getElementById('listaPokemon');
+        listaPokemonsDiv.innerHTML = '<p class="text-center">Carregando pokemons...</p>';
 
-            listaPokemonsDiv.innerHTML = '<p class = "text-center">Carregando pokemons...</p>'
+    try {
+        const limite = 386;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limite}`);
+        if(!response.ok) throw new Error("Falha ao carregar");
 
-            try
-            {
-                const limite = 386;
-                const limitURL = `https://pokeapi.co/api/v2/pokemon?limit=${limite}`;
+        const data = await response.json();
+        const ids = data.results.map(p => p.url.split('/').slice(-2)[0]);
 
-                const response = await fetch(limitURL);
+        todosIds = ids;
 
-                if(!response.ok) throw new Error("Falha ao carregar a lista de pokemons");
+        const deveFiltrar = localStorage.getItem('filtrarFavoritos');
 
-                const data = await response.json();
-
-                const ids = data.results.map(p => {
-                    const parts = p.url.split('/');
-
-                    return parts[parts.length - 2];
-                });
-
-                todosIds = ids;
-                //verificacao de filtro inicial
-                const deveFiltrar = localStorage.getItem('filtrarFavoritos');
-
-                if(deveFiltrar === 'true')
-                {
-                    localStorage.removeItem('filtrarFavoritos');
-                    aplicarFiltroFavs();
-                }else
-                    if(ids.length > 0)
-                {
-                    await aparecerPokemons(ids)
-                }
-                else{
-                    listaPokemonsDiv.innerHTML = '<p class = "text-center text-danger"> Não foi possível obter as informações</p>'
-                }
-            } catch(error)
-            {
-                console.error("Erro no carregamento automatico", error);
-                listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar a lista completa de Pokémons. Verifique sua conexão.</p>';
-            }
-
-                if(listaPokemonsDiv)
-                    {
-                carregarTudoAuto();
-
-                if(btnFiltroFav)
-                {
-                    btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
-                }
-                if(btnMostraTudo) {
-                    btnMostraTudo.addEventListener('click', ()=> {
-                        if(todosIds.length > 0)
-                        {
-                            carregarTudoAuto();
-                        }
-                    })
-                }
-
-                }
-
+        if(deveFiltrar === 'true') {
+            localStorage.removeItem('filtrarFavoritos');
+            return aplicarFiltroFavs();
         }
+
+        return aparecerPokemons(ids);
+
+    } catch (error) {
+        console.error("Erro no carregamento automatico", error);
+        listaPokemonsDiv.innerHTML = '<p class="text-center text-danger">Erro ao carregar</p>';
+    }
+}
 
         //carregarTudoAuto();
         export function aplicarFiltroFavs()
@@ -107,23 +74,4 @@ export async function aparecerPokemons(identificadores) {
             } else {
                 listaPokemonsDiv.innerHTML = '<p class = "text-center alert alert-info">Voce não possui pokemons favoritos!</p>'
             }
-        }
-
-        if(listaPokemonsDiv)
-        {
-            carregarTudoAuto();
-
-            if(variaveis.btnFiltroFav)
-            {
-                variaveis.btnFiltroFav.addEventListener('click', aplicarFiltroFavs);
-            }
-            if(variaveis.btnMostraTudo) {
-                variaveis.btnMostraTudo.addEventListener('click', ()=> {
-                    if(todosIds.length > 0)
-                    {
-                        carregarTudoAuto();
-                    }
-                })
-            }
-
         }
