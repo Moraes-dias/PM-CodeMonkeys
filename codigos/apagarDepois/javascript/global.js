@@ -1,5 +1,6 @@
 //controla as variaveis globais, como por exemplo ids
-import { favoritar, irFavs } from './fav'
+import { favoritar, irFavs } from './fav.js'
+
 export function iniciarGlobal()
 {
     document.addEventListener('click', (e)=>{
@@ -13,10 +14,7 @@ export function iniciarGlobal()
         console.log('escondeu')
         buscaProntaEsconder.classList.add('escondido');
         }
-    })
-    
-        const btnFavorito = fav.target.closest('.favorito-btn');
-
+        const btnFavorito = e.target.closest('.favorito-btn');
         if(btnFavorito)
         {
             const numDex = btnFavorito.dataset.dexId;
@@ -32,8 +30,8 @@ export function iniciarGlobal()
             icone.classList.toggle('text-danger', !estaFavorito);
             icone.classList.toggle('text-secondary', estaFavorito);
         }
-
-        const btnFavHome = getElementById('btnFav');
+        })
+        const btnFavHome = document.getElementById('favs');
 
         btnFavHome.addEventListener('click', irFavs)
 }

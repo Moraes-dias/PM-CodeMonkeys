@@ -1,4 +1,5 @@
-import { status } from "./construtores";
+import { status } from "./construtores.js";
+import { obterFavs } from "./fav.js";
 
 export async function criarPokemons(identificadores)
 {

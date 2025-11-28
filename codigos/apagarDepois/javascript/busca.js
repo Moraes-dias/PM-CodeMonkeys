@@ -3,7 +3,10 @@
 
 export const form = document.getElementById('form-busca');
 export const buscador = document.getElementById('busca')
-export const resultado = document.getElementById('resultado')
+export const resultado = document.getElementById('resultado');
+export const btnFiltroFav = document.getElementById('favs');
+export const btnMostraTudo = document.getElementById('mostrarDex');
+
 export function buscar(evento) {
         evento.preventDefault();
         
@@ -20,9 +23,7 @@ export function buscar(evento) {
 
         window.location.href = 'pokeall.html'
 
-        if(form){
-                form.addEventListener('submit', buscar)
-            } else {
+        if(!form){
                 console.error("Elemento não encontrado")
             }
 }
