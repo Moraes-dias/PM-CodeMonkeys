@@ -1,4 +1,5 @@
-import { status } from "./construtores";
+import { status } from "./construtores.js";
+import { obterFavs } from "./fav.js";
 
 export async function criarPokemons(identificadores)
 {
@@ -60,6 +61,7 @@ export async function mapeamentoStatus(dados)
         tipagem.type.name.charAt(0).toUpperCase() + tipagem.type.name.slice(1)
     );
 
+    let sprites = dados.sprites.front_default;
     const mapeamentoStatus = dados.stats.reduce((acc, infoStatus)=>{
         acc[infoStatus.stat.name] = infoStatus.base_stat;
         return acc;
@@ -87,6 +89,7 @@ export async function mapeamentoStatus(dados)
         regiao,
         tipos,
         isFavorito,
+        sprites,
         mapeamentoStatus['hp'],
         mapeamentoStatus['attack'],
         mapeamentoStatus['defense'],
