@@ -1,3 +1,4 @@
+import { criarPokemons } from './api.js';
 //vai chamar criarPoke e vai criar os cards e row
 export function gerarPoke(p) {
     const coracao = p.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
@@ -6,6 +7,11 @@ export function gerarPoke(p) {
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
                 <div class="card shadow-sm h-100" style="border: 2px solid #0d6efd;">
                     <div class="card-body">
+                        <div class = "text-center">
+                            <button class = "card-grande" data-dex-id="${p.numDex}" style = "border:none; background:none;">
+                                <img src = ${p.spritesPronto}>
+                            </button>
+                        </div>
                         <div class = "d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-center text-primary">#${p.numDex} ${p.nome}</h5>
                             <button class = "btn btn-sm p-0 favorito-btn" data-dex-id="${p.numDex}" style = "border: none; background: none;">

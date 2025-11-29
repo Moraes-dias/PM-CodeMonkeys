@@ -1,5 +1,6 @@
 //controla as variaveis globais, como por exemplo ids
-import { favoritar, irFavs } from './fav.js'
+import { favoritar, irFavs } from './fav.js';
+import { exibicao } from './criar.js';
 
 export function iniciarGlobal()
 {
@@ -30,8 +31,20 @@ export function iniciarGlobal()
             icone.classList.toggle('text-danger', !estaFavorito);
             icone.classList.toggle('text-secondary', estaFavorito);
         }
+
+        const btnCard = e.target.closest('.card-grande');
+        if(btnCard){
+
+            const numDex = btnCard.dataset.dexId;
+            console.log(`botao card grande clicado pokemon #${numDex}`);
+
+            exibicao([numDex]);
+        }
         })
         const btnFavHome = document.getElementById('favs');
 
-        btnFavHome.addEventListener('click', irFavs)
+        btnFavHome.addEventListener('click', irFavs);
+
+
+
 }
