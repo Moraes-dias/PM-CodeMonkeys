@@ -1,1 +1,60 @@
+
 //aqui vai filtrar tambem
+import { exibicao } from "./criar.js";
+
+export const form = document.getElementById('form-busca');
+export const formHome = document.getElementById('form-busca-home')
+export const buscador = document.getElementById('busca')
+export const btnRandom = document.getElementById('random')
+export const btnDex = document.getElementById('mostrarDex')
+
+export function buscarHome(evento) {
+        evento.preventDefault();
+
+
+        let termo = buscador.value.trim();
+
+        if(termo === "")
+        {
+            resultado.innerHTML = "<p class = 'text-center'>Digite o nome de um pokemon da primeira geração</p>"
+            return;
+        }
+        //busca
+        localStorage.setItem('termoBusca', termo.toLowerCase())
+
+        window.location.href = 'pokeall.html'
+
+        if(!form){
+                console.error("Elemento não encontrado")
+            }
+}
+export function buscarDex(evento) {
+        evento.preventDefault();
+
+
+        let termo = buscador.value.trim();
+
+        if(termo === "")
+        {
+            resultado.innerHTML = "<p class = 'text-center'>Digite o nome de um pokemon da primeira geração</p>"
+            return;
+        }
+        //busca
+        localStorage.setItem('termoBusca', termo.toLowerCase())
+
+        buscador.value = '';
+        
+        exibicao([termo.toLowerCase()]);
+        localStorage.removeItem('termoBusca')
+}
+
+
+export function aleatorio()
+    {
+        const minimo = Math.ceil(1);
+        const maximo = Math.floor(386);
+
+        const idRandom = Math.floor(Math.random() * (maximo - minimo +1)) + minimo;
+
+        exibicao([idRandom]);
+    }

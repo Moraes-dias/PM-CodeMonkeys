@@ -10,8 +10,6 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
-
-
 class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
@@ -155,8 +153,7 @@ async function criarPokemons(identificadores) {
         return [];
     }
 }
-
-
+//feito por gregory
 document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
     const buscador = document.getElementById('busca')
@@ -184,14 +181,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
             console.error("Elemento não encontrado")
         }
 });
+
+
+var todosIds = [];
+
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
 
     const btnFiltroFav = document.getElementById('favs');
     const btnMostraTudo = document.getElementById('mostrarDex')
     const btnRandom = document.getElementById('random');
-
-    let todosIds = [];
 
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {

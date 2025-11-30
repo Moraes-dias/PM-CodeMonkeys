@@ -1,6 +1,6 @@
 export class pokemon
 {
-    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
+    constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false, spritesPronto = "string")
     /*
         construtor do pokemon necessario fazer 2 classes uma para o
         o pokemon em si e uma para os status para assim evitar linhas desnecessarias
@@ -11,6 +11,7 @@ export class pokemon
         this.regiao = regiao;
         this.tipos = tipos;
         this.favorito = favorito;
+        this.spritesPronto = spritesPronto;
     }
     descricao() //metodo para mostrar as caracteristicas do pokemon
     {
@@ -23,9 +24,9 @@ export class pokemon
 
 export class status extends pokemon
 {
-    constructor(numDex, nome, regiao, tipos, favorito,  hp = 0,atkFisico = 0, defFisica = 0, atkEspecial = 0, defEspecial = 0, velocidade = 0)
+    constructor(numDex, nome, regiao, tipos, favorito, spritesPronto,  hp = 0,atkFisico = 0, defFisica = 0, atkEspecial = 0, defEspecial = 0, velocidade = 0)
     {
-        super(numDex, nome, regiao, tipos, favorito); //heranca das caracteristicas da classe pai (pokemon)
+        super(numDex, nome, regiao, tipos, favorito, spritesPronto); //heranca das caracteristicas da classe pai (pokemon)
 
         this.hp = hp;
         this.atkFisico = atkFisico;
