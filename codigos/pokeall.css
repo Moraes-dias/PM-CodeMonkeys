@@ -17,7 +17,6 @@ body{
 }
 
 .box-vermelha {
-
   display: flex;
   flex-direction: column;
   background-color: red;
@@ -28,6 +27,7 @@ body{
   width: 100vw;
   height: 100vh;
   left: 0;
+  min-width: 100vw;
 }
 
 .titulo {
@@ -330,10 +330,10 @@ body{
 /* === Telas grandes (≥1600px) === */
 @media (min-width: 1600px) {
   .box-vermelha {
-    width: 75vw;
+    width: 100vw;
     max-width: 1400px;
-    height: 85vh;
-    overflow-y: hidden;
+    height: 100vh;
+    /*overflow-y: hidden;*/
     }
     .conteudo { font-size: 1.2rem; }
   }

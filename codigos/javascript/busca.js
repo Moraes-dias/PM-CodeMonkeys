@@ -1,13 +1,14 @@
+
 //aqui vai filtrar tambem
-import { exibicao } from "./criar";
+import { exibicao } from "./criar.js";
 
 export const form = document.getElementById('form-busca');
+export const formHome = document.getElementById('form-busca-home')
 export const buscador = document.getElementById('busca')
-export const resultado = document.getElementById('resultado');
-export const btnFiltroFav = document.getElementById('favs');
-export const btnMostraTudo = document.getElementById('mostrarDex');
+export const btnRandom = document.getElementById('random')
+export const btnDex = document.getElementById('mostrarDex')
 
-export function buscar(evento) {
+export function buscarHome(evento) {
         evento.preventDefault();
 
 
@@ -26,6 +27,25 @@ export function buscar(evento) {
         if(!form){
                 console.error("Elemento não encontrado")
             }
+}
+export function buscarDex(evento) {
+        evento.preventDefault();
+
+
+        let termo = buscador.value.trim();
+
+        if(termo === "")
+        {
+            resultado.innerHTML = "<p class = 'text-center'>Digite o nome de um pokemon da primeira geração</p>"
+            return;
+        }
+        //busca
+        localStorage.setItem('termoBusca', termo.toLowerCase())
+
+        buscador.value = '';
+        
+        exibicao([termo.toLowerCase()]);
+        localStorage.removeItem('termoBusca')
 }
 
 

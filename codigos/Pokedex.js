@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
 });
 
-export var todosIds = [];
+
+var todosIds = [];
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');

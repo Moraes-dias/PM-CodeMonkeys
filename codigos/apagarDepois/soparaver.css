@@ -5,11 +5,11 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display:flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100;
     background-color:lightpink;
     justify-content: center;
     align-items: flex-start;
-    padding: 1rem;
+    /*padding: 1rem;*/
 }
 .escondido
 {
@@ -24,8 +24,10 @@ body{
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   position: relative;
-  width: 1000px;
+  width: 100vw;
   height: 100vh;
+  left: 0;
+  min-width: 100vw;
 }
 
 .titulo {
@@ -124,7 +126,7 @@ body{
     }
 
 .row{
-    width: 60re;
+    width: 40rem;
     background-color: white;
     padding: 0px;
     border: 3px solid rgb(184, 180, 180);
@@ -135,7 +137,8 @@ body{
   gap: 8px;
 }
 
-/*.left-btn form, .left-btn ol{
+/* acho que esse é o errado
+.left-btn form, .left-btn ol{
     display:flex ;
     flex-direction: column;
     gap:10px;
@@ -182,7 +185,7 @@ body{
   border: 3px solid rgb(184, 180, 180);
 }
 
-/*.left-btn {
+.left-btn {
   margin-left: 5px;
   background-color: rgb(255, 56, 56);
   width: 10rem;
@@ -192,7 +195,7 @@ body{
   padding-top: 15px;
   border: 3px solid rgb(201, 27, 27);
   border-radius: 20px;
-}*/
+}
 
 #home{ /*era settings*/
     margin-left: 10px;
@@ -327,23 +330,20 @@ body{
 /* === Telas grandes (≥1600px) === */
 @media (min-width: 1600px) {
   .box-vermelha {
-    width: 75vw;
+    width: 100vw;
     max-width: 1400px;
-    height: 85vh;
-    overflow-y: hidden;
+    height: 100vh;
+    /*overflow-y: hidden;*/
+    }
+    .conteudo { font-size: 1.2rem; }
   }
-  .conteudo { font-size: 1.2rem;}
-}
-
-@media (max-width: 1150px) {
+  @media (max-width: 1150px) {
     .box-vermelha {
         height: auto;
         min-height: 100vh;
         font-size: 15px
-
     }
 }
-
 @media (max-width: 800px) {
     .box-vermelha {
         width: 95vw;
@@ -375,7 +375,7 @@ body{
     }
 
     .left-btn {
-        width: 100%;
+        width: 90%;
         max-width: 15rem;
         height: fit-content;
         margin-left: 0;
@@ -390,9 +390,6 @@ body{
         gap: 10px;
     }
 
-    .row {
-        width: 92%;
-    }
 
     .bolinhas-topo {
         top: 1rem;
@@ -419,11 +416,8 @@ body{
 
 @media (max-width: 490px) {/*telas de celular*/
     .box-vermelha {
-        height: 100vw;
+        width: 100vw;
         padding: 1rem 0.5rem;
-        justify-content: center;
-        min-height: none;
-
     }
     #busca
     {
@@ -479,8 +473,9 @@ body{
   .box-vermelha
   {
     width: 100%;
-    margin: 0;
-    padding:0;
+    height: 100%;
+    border-radius: 0px;
+
   }
   .menos400
   {
@@ -497,3 +492,4 @@ body{
     width: 93%;
   }
 }
+/*urruu*/
