@@ -10,8 +10,6 @@ function saveFav(favoritos)
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
-
-
 class pokemon
 {
     constructor(numDex = 0, nome = 'padrao', regiao = 'padrao', tipos = [], favorito = false)
@@ -52,19 +50,6 @@ class status extends pokemon
     {
         return `HP: ${this.hp} ATK fisico: ${this.atkFisico} DEF fisica: ${this.defFisica} ATK especial: ${this.atkEspecial} DEF especial: ${this.defEspecial} VEL: ${this.velocidade}`
     }
-}
-
-class user{
-    constructor(senha = 0, email='eita' , usuario='kkkkk'){
-        this.senha = senha;
-        this.email = email;
-        this.usuario=usuario;
-    }
-    mostrarDadosUsuario()
-    {
-        return `usuario: ${this.usuario} email: ${this.email}`
-    }
-
 }
 
 /**
@@ -168,8 +153,7 @@ async function criarPokemons(identificadores) {
         return [];
     }
 }
-
-
+//feito por gregory
 document.addEventListener('DOMContentLoaded', ()=> {
     const form = document.getElementById('form-busca');
     const buscador = document.getElementById('busca')
@@ -197,14 +181,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
             console.error("Elemento não encontrado")
         }
 });
+
+
+var todosIds = [];
+
 document.addEventListener('DOMContentLoaded', ()=>{
     const listaPokemonsDiv = document.getElementById('listaPokemon');
 
     const btnFiltroFav = document.getElementById('favs');
     const btnMostraTudo = document.getElementById('mostrarDex')
     const btnRandom = document.getElementById('random');
-
-    let todosIds = [];
 
     const termoBusca = localStorage.getItem('termoBusca');
     function gerarPoke(p) {
