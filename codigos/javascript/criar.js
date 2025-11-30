@@ -58,24 +58,39 @@ export async function exibicao(identificadores)
                 const coracaoBusca = achou.favorito ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart text-secondary'
 
                 const conteudoAchou = `
-                    <div class = "card shadow-lg h-100 border-success">
-                        <div class = "card-body">
-                            <div class = "d-flex justify-content-between align-items-center>
-                                <h4 class = "card-title text-center text-success">${achou.nome.toUpperCase()}</h4>
-                                <button class = "btn btn-sm p-0 favorito-btn" data-dex-id = "${achou.numDex}" style = "border: none; background: none;">
-                                    <i class = "${coracaoBusca} fs-4"></i>
-                                </button>
-                                <button class = "btn btn-sm p-0" id = "fecharBusca"><i class = "fa-solid fa-xmark"></i></button>
+                        <div class="card shadow-lg h-100 border-success">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title text-center text-success mb-0">${achou.nome.toUpperCase()}</h4>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button class="btn btn-sm p-0 favorito-btn" data-dex-id="${achou.numDex}" style="border: none; background: none;">
+                                            <i class="${coracaoBusca} fs-4"></i>
+                                        </button>
+                                        <button class="btn btn-sm p-0" id="fecharBusca">
+                                            <i class="fa-solid fa-xmark fs-4 text-secondary"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <hr>
+
+                                <div class="d-flex justify-content-center align-items-center my-3">
+                                    <img src="${achou.spritesPronto}" class="img-fluid" alt="${achou.nome}" style="width: 150px; height: 150px; object-fit: contain;">
+                                </div>
+
+                                <hr>
+                                
+                                <p><strong>#${achou.numDex}</strong></p>
+                                <p><strong>Região: </strong>${achou.regiao}</p>
+                                <p><strong>Tipo: </strong>${achou.tipos.join(" / ")}</p>
+                                <p><strong>Favorito: </strong>${achou.favorito ? 'Sim' : 'Não'}</p>
+                                
+                                <h5 class="mt-3 text-success">Status Base</h5>
+                                <div class="p-2 bg-light rounded border">
+                                    <p class="mb-0 small">${achou.mostrarValores()}</p>
+                                </div>
                             </div>
-                            <hr>
-                            <p><strong>#${achou.numDex}</strong></p>
-                            <p><strong>Região: </strong>${achou.regiao}</p>
-                            <p><strong>Tipo:</strong>${achou.tipos.join(" / ")}</p>
-                            <p><strong>Favorito:</strong>${achou.favorito ? 'sim' : 'não'}</p>
-                            <h5>Status</h5>
-                            <p>${achou.mostrarValores()}</p>
                         </div>
-                    </div>
                 `;
                 resultadoBuscaDiv.innerHTML = conteudoAchou;
             } else {
